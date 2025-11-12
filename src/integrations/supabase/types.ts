@@ -14,7 +14,330 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      certificates: {
+        Row: {
+          certificate_url: string | null
+          course_id: string | null
+          id: string
+          issued_at: string | null
+          student_id: string | null
+        }
+        Insert: {
+          certificate_url?: string | null
+          course_id?: string | null
+          id?: string
+          issued_at?: string | null
+          student_id?: string | null
+        }
+        Update: {
+          certificate_url?: string | null
+          course_id?: string | null
+          id?: string
+          issued_at?: string | null
+          student_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "certificates_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "certificates_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chat_rooms: {
+        Row: {
+          course_id: string | null
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          course_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          course_id?: string | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_rooms_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          code: string
+          created_at: string | null
+          description: string | null
+          id: string
+          lecturer_id: string | null
+          name: string
+          updated_at: string | null
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          lecturer_id?: string | null
+          name: string
+          updated_at?: string | null
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          lecturer_id?: string | null
+          name?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "courses_lecturer_id_fkey"
+            columns: ["lecturer_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      enrollments: {
+        Row: {
+          course_id: string | null
+          enrolled_at: string | null
+          grade: string | null
+          id: string
+          progress: number | null
+          student_id: string | null
+        }
+        Insert: {
+          course_id?: string | null
+          enrolled_at?: string | null
+          grade?: string | null
+          id?: string
+          progress?: number | null
+          student_id?: string | null
+        }
+        Update: {
+          course_id?: string | null
+          enrolled_at?: string | null
+          grade?: string | null
+          id?: string
+          progress?: number | null
+          student_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "enrollments_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "enrollments_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string | null
+          id: string
+          room_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          content: string
+          created_at?: string | null
+          id?: string
+          room_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          content?: string
+          created_at?: string | null
+          id?: string
+          room_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_room_id_fkey"
+            columns: ["room_id"]
+            isOneToOne: false
+            referencedRelation: "chat_rooms"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "messages_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notifications: {
+        Row: {
+          created_at: string | null
+          id: string
+          is_read: boolean | null
+          link: string | null
+          message: string
+          title: string
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message: string
+          title: string
+          type: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          is_read?: boolean | null
+          link?: string | null
+          message?: string
+          title?: string
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          course: string | null
+          created_at: string | null
+          department: string | null
+          full_name: string
+          id: string
+          role: string
+          staff_id: string | null
+          student_id: string | null
+          updated_at: string | null
+          year_of_study: number | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          course?: string | null
+          created_at?: string | null
+          department?: string | null
+          full_name: string
+          id: string
+          role: string
+          staff_id?: string | null
+          student_id?: string | null
+          updated_at?: string | null
+          year_of_study?: number | null
+        }
+        Update: {
+          avatar_url?: string | null
+          course?: string | null
+          created_at?: string | null
+          department?: string | null
+          full_name?: string
+          id?: string
+          role?: string
+          staff_id?: string | null
+          student_id?: string | null
+          updated_at?: string | null
+          year_of_study?: number | null
+        }
+        Relationships: []
+      }
+      virtual_meetings: {
+        Row: {
+          course_id: string | null
+          created_at: string | null
+          created_by: string | null
+          description: string | null
+          duration_minutes: number | null
+          id: string
+          meeting_url: string
+          scheduled_at: string
+          title: string
+        }
+        Insert: {
+          course_id?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          meeting_url: string
+          scheduled_at: string
+          title: string
+        }
+        Update: {
+          course_id?: string | null
+          created_at?: string | null
+          created_by?: string | null
+          description?: string | null
+          duration_minutes?: number | null
+          id?: string
+          meeting_url?: string
+          scheduled_at?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "virtual_meetings_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "virtual_meetings_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
