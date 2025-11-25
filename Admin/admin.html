@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLearn - Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn</span>
+      </div>
+      <div class="nav-links">
+        <a href="home.html" class="nav-link" data-page="home">Home</a>
+        <a href="courses.html" class="nav-link" data-page="courses">Courses</a>
+        <a href="student.html" class="nav-link" data-page="student">Students</a>
+        <a href="lecturer.html" class="nav-link" data-page="lecturer"
+          >Lecturers</a
+        >
+        <a href="admin.html" class="nav-link active" data-page="admin">Admin</a>
+        <a href="chatbot.html" class="nav-link" data-page="chatbot">Chatbot</a>
+        <a href="about.html" class="nav-link" data-page="about">About</a>
+        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <div class="role-indicator">
+          <i class="fas fa-user-shield"></i>
+          <span>Admin</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="chatbot-toggle" id="chatbotToggle">
+          <i class="fas fa-comment-alt"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Admin Panel -->
+    <div class="dashboard admin-dashboard">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>Admin Panel</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="admin.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="Users.html"><i class="fas fa-users"></i> User Management</a>
+          </li>
+          <li>
+            <a href="Courses.html"><i class="fas fa-book"></i> Course Management</a>
+          </li>
+          <li>
+            <a href="Monitoring.html"><i class="fas fa-server"></i> System Monitoring</a>
+          </li>
+          <li>
+            <a href="Approvals.html"><i class="fas fa-check-circle"></i> Approvals</a>
+          </li>
+          <li>
+            <a href="Content.html"><i class="fas fa-folder-open"></i> Content Management</a>
+          </li>
+          <li>
+            <a href="Reports.html"><i class="fas fa-chart-bar"></i> Reports & Analytics</a>
+          </li>
+          <li>
+            <a href="AdminAnnouncements.html"><i class="fas fa-bullhorn"></i> Announcements</a>
+          </li>
+          <li>
+            <a href="AdminSettings.html"><i class="fas fa-cog"></i> Settings</a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <h2 class="section-title">Admin Dashboard</h2>
+
+        <div class="dashboard-cards">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Total Students</div>
+              <div class="card-icon">
+                <i class="fas fa-user-graduate"></i>
+              </div>
+            </div>
+            <div class="card-value" id="adminTotalStudents">0</div>
+            <p>Across platform</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Total Lecturers</div>
+              <div class="card-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+            </div>
+            <div class="card-value" id="adminTotalLecturers">0</div>
+            <p>Active accounts</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Total Courses</div>
+              <div class="card-icon">
+                <i class="fas fa-book-open"></i>
+              </div>
+            </div>
+            <div class="card-value" id="adminTotalCourses">0</div>
+            <p>Created</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Active Sessions</div>
+              <div class="card-icon">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+            <div class="card-value" id="adminActiveSessions">0</div>
+            <p>Currently online</p>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <h3>Recent Activity</h3>
+          <ul id="adminRecentLogs"></ul>
+        </div>
+
+        <div class="table-container">
+          <h3>Quick Actions</h3>
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+            <a class="btn btn-primary" href="Users.html#add">Add User</a>
+            <a class="btn btn-primary" href="Courses.html#create">Create Course</a>
+            <a class="btn btn-primary" href="AdminAnnouncements.html#post">Post Announcement</a>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 1rem;
+            "
+          >
+            <h3>Manage Users</h3>
+            <div style="display: flex; gap: 1rem">
+              <input
+                type="text"
+                placeholder="Search users..."
+                style="
+                  padding: 0.5rem;
+                  border-radius: 5px;
+                  border: 1px solid var(--light-gray);
+                "
+              />
+              <button class="btn btn-primary">Add User</button>
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminUsersTable"></tbody>
+          </table>
+        </div>
+
+        <div class="table-container">
+          <h3>System Reports</h3>
+          <div style="display: flex; gap: 1rem; margin-bottom: 1rem">
+            <button class="btn">User Activity</button>
+            <button class="btn">Course Completion</button>
+            <button class="btn">Revenue</button>
+            <button class="btn">Engagement</button>
+          </div>
+          <div
+            style="
+              background: white;
+              padding: 1.5rem;
+              border-radius: var(--border-radius);
+              box-shadow: var(--box-shadow);
+            "
+          >
+            <h4>Monthly Active Users</h4>
+            <div
+              style="
+                display: flex;
+                height: 200px;
+                align-items: flex-end;
+                gap: 1rem;
+                margin-top: 1rem;
+              "
+            >
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  style="
+                    background: var(--primary);
+                    width: 100%;
+                    height: 60%;
+                    border-radius: 5px 5px 0 0;
+                  "
+                ></div>
+                <span>Jan</span>
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  style="
+                    background: var(--primary);
+                    width: 100%;
+                    height: 70%;
+                    border-radius: 5px 5px 0 0;
+                  "
+                ></div>
+                <span>Feb</span>
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  style="
+                    background: var(--primary);
+                    width: 100%;
+                    height: 80%;
+                    border-radius: 5px 5px 0 0;
+                  "
+                ></div>
+                <span>Mar</span>
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  style="
+                    background: var(--primary);
+                    width: 100%;
+                    height: 90%;
+                    border-radius: 5px 5px 0 0;
+                  "
+                ></div>
+                <span>Apr</span>
+              </div>
+              <div
+                style="
+                  flex: 1;
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                "
+              >
+                <div
+                  style="
+                    background: var(--primary);
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 5px 5px 0 0;
+                  "
+                ></div>
+                <span>May</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Chatbot Toggle -->
+    <div class="chatbot-toggle-btn" id="floatingChatBtn">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="admin.html">Admin</a>
+          <a href="chatbot.html">Chatbot</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          &copy; 2025 SmartLearn. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const themeToggle = document.getElementById('themeToggle');
+      const chatbotToggle = document.getElementById('chatbotToggle');
+      const floatingChatBtn = document.getElementById('floatingChatBtn');
+      const chatbotContainer = document.getElementById('chatbotContainer');
+      const closeChat = document.getElementById('closeChat');
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+          const icon = themeToggle.querySelector('i');
+          if (document.body.classList.contains('dark-mode')) {
+            icon.classList.replace('fa-moon', 'fa-sun');
+          } else {
+            icon.classList.replace('fa-sun', 'fa-moon');
+          }
+        });
+      }
+      (function(){
+        function loadAdminUsers(){ try{ const r = localStorage.getItem('adminUsers'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+        const table = document.getElementById('adminUsersTable');
+        function render(){ const list = loadAdminUsers(); table.innerHTML = list.length ? list.map(u => `<tr><td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td><span style="color: var(--success)">${u.status||'Active'}</span></td><td><button class="action-btn view-btn">View</button><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Remove</button></td></tr>`).join('') : '<tr><td colspan="5">No users yet</td></tr>'; }
+        render();
+      })();
+
+      function mountChatbotOverlay() {
+        if (document.getElementById('chatbotContainer')) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'chatbot-container';
+        wrap.id = 'chatbotContainer';
+        wrap.style.display = 'flex';
+        wrap.innerHTML = '<div class="chatbot-header"><h3><i class="fas fa-robot"></i> SmartLearn AI Tutor</h3><button class="close-chat" id="closeChat">&times;</button></div><div class="chat-messages" id="chatMessages"><div class="message bot-message">Hello! I\'m your SmartLearn Assistant. What topic would you like help with?</div></div><div class="chat-input"><input type="text" id="userInput" placeholder="Type your message..." /><button id="sendBtn">Send</button></div>';
+        document.body.appendChild(wrap);
+        const sendEl = document.getElementById('sendBtn');
+        const inputEl = document.getElementById('userInput');
+        const closeEl = document.getElementById('closeChat');
+        if (sendEl) sendEl.addEventListener('click', handleUserMessage);
+        if (inputEl) inputEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+        if (closeEl) closeEl.addEventListener('click', () => { const c = document.getElementById('chatbotContainer'); if (c) c.style.display = 'none'; });
+      }
+
+      function toggleChatbot() {
+        let container = document.getElementById('chatbotContainer');
+        if (!container) {
+          mountChatbotOverlay();
+          container = document.getElementById('chatbotContainer');
+        }
+        if (!container) return;
+        container.style.display = container.style.display === 'flex' ? 'none' : 'flex';
+      }
+
+      if (chatbotToggle) chatbotToggle.addEventListener('click', toggleChatbot);
+      if (floatingChatBtn) floatingChatBtn.addEventListener('click', toggleChatbot);
+      if (closeChat) closeChat.addEventListener('click', () => {
+        if (chatbotContainer) chatbotContainer.style.display = 'none';
+      });
+
+      const responses = {
+        hello: "Hi there! How can I help you learn today?",
+        hi: "Hello! What would you like to learn about?",
+        math: "Let's dive into math! Here's a quick refresher on algebra: Variables represent unknown values, and equations show relationships between quantities.",
+        science: "Science is amazing! Do you want to learn about physics, chemistry, or biology?",
+        programming: "Programming is a valuable skill! Would you like to learn about web development, data science, or mobile apps?",
+        quiz: "Sure! Here's a mini quiz: What is the capital of France? A) London B) Berlin C) Paris D) Madrid",
+        feedback: "I'd love to give you feedback! Please share what you're working on.",
+        progress: "I see you're making great progress! Keep up the good work.",
+        certificate: "Congratulations on completing your course! Your certificate is ready for download.",
+        enroll: "To enroll in a course, simply click the 'Enroll' button on any course card.",
+        default: "I'm still learning! Try asking about math, science, programming, or quizzes. You can also ask for feedback or check your progress."
+      };
+      function getBotResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+        for (const [key, response] of Object.entries(responses)) {
+          if (message.includes(key)) return response;
+        }
+        return responses.default;
+      }
+      function addMessage(message, isUser = false) {
+        const box = document.getElementById('chatMessages');
+        if (!box) return;
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message ' + (isUser ? 'user-message' : 'bot-message');
+        messageDiv.textContent = message;
+        box.appendChild(messageDiv);
+        box.scrollTop = box.scrollHeight;
+      }
+      function handleUserMessage() {
+        const inputEl = document.getElementById('userInput');
+        if (!inputEl) return;
+        const message = inputEl.value.trim();
+        if (message) {
+          addMessage(message, true);
+          inputEl.value = '';
+          setTimeout(() => { const botResponse = getBotResponse(message); addMessage(botResponse); }, 500);
+        }
+      }
+
+      function loadAdminUsers(){ try{ const r = localStorage.getItem('adminUsers'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+      function loadAdminCourses(){ try{ const r = localStorage.getItem('adminCourses'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+      function loadAdminLogs(){ try{ const r = localStorage.getItem('adminLogs'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+
+      function initializeAdminDashboard(){ const root = document.querySelector('.admin-dashboard'); if(!root) return; const sCount = document.getElementById('adminTotalStudents'); const lCount = document.getElementById('adminTotalLecturers'); const cCount = document.getElementById('adminTotalCourses'); const aCount = document.getElementById('adminActiveSessions'); const logs = document.getElementById('adminRecentLogs'); const users = loadAdminUsers(); const courses = loadAdminCourses(); const students = users.filter(u=>u.role==='student').length; const lecturers = users.filter(u=>u.role==='lecturer').length; if(sCount) sCount.textContent = String(students); if(lCount) lCount.textContent = String(lecturers); if(cCount) cCount.textContent = String(courses.length); if(aCount) aCount.textContent = String(Math.max(0, students + lecturers - 1)); if(logs) logs.innerHTML = loadAdminLogs().map(l => `<li>${l.ts} · ${l.text}</li>`).join(''); }
+
+      initializeAdminDashboard();
+    </script>
+  </body>
+</html>

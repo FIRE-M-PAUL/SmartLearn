@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmartLearn - Course Content</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <a href="../home.html" class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn📘</span>
+      </a>
+      <div class="nav-icons">
+        <div class="role-indicator">
+          <i class="fas fa-user-graduate"></i>
+          <span>Student</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Student Dashboard -->
+    <div class="dashboard">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>Student Dashboard</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="student.html" id="dashboard-link"
+              ><i class="fas fa-home"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="courses.html" id="courses"
+              ><i class="fas fa-book"></i> My Courses</a
+            >
+          </li>
+          <li>
+            <a href="progress.html" id="progress"
+              ><i class="fas fa-chart-line"></i> Progress</a
+            >
+          </li>
+          <li>
+            <a href="messages.html" id="messages"
+              ><i class="fas fa-comments"></i> Messages</a
+            >
+          </li>
+          <li>
+            <a href="settings.html" id="settings-link"
+              ><i class="fas fa-cog"></i> Settings</a
+            >
+          </li>
+          <li>
+            <button id="chatbotToggle" class="sidebar-btn"
+              ><i class="fas fa-robot"></i> Ask AI Tutor</button
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div id="enrollNotice" style="display:none; background:#fff3cd; color:#856404; border:1px solid #ffeeba; padding:12px; border-radius:8px; margin-bottom:12px;">
+          Please enroll in a course to view content. Redirecting to courses...
+          <button id="goEnrollBtn" class="btn" style="margin-left:10px;">Go to Courses</button>
+        </div>
+        <div class="course-content-page">
+          <div class="course-header">
+            <div class="course-header-icon" id="courseIcon">
+              <i class="fas fa-code"></i>
+            </div>
+            <div class="course-header-info">
+              <h1 id="courseTitle">Advanced JavaScript</h1>
+              <p id="courseDescription">
+                Master modern JavaScript concepts including ES6+, async/await, and
+                more.
+              </p>
+            </div>
+          </div>
+
+          <div class="lesson" id="lesson1">
+            <div class="lesson-header">
+              <div class="lesson-title">Introduction to Modern JavaScript</div>
+              <div class="lesson-duration">Duration: 15 min</div>
+            </div>
+            <div class="lesson-content">
+              <p>
+                Welcome to Advanced JavaScript! In this course, you'll learn about
+                the latest features in JavaScript that make development more
+                efficient and enjoyable.
+              </p>
+              <p>
+                Modern JavaScript (ES6+) introduces many powerful features like
+                arrow functions, template literals, destructuring, and modules.
+                These features help you write cleaner, more concise code.
+              </p>
+              <p>
+                Let's start with arrow functions. They provide a shorter syntax for
+                writing function expressions:
+              </p>
+              <pre><code>const add = (a, b) => a + b;</code></pre>
+              <p>This is equivalent to:</p>
+              <pre><code>function add(a, b) {
+  return a + b;
+}</code></pre>
+            </div>
+            <button class="completion-btn" data-lesson="1">Complete Lesson</button>
+          </div>
+
+          <div class="lesson" id="lesson2">
+            <div class="lesson-header">
+              <div class="lesson-title">Asynchronous JavaScript</div>
+              <div class="lesson-duration">Duration: 20 min</div>
+            </div>
+            <div class="lesson-content">
+              <p>
+                Asynchronous programming is essential for handling operations that
+                take time, like fetching data from a server or reading files.
+              </p>
+              <p>
+                JavaScript provides several ways to handle asynchronous operations:
+              </p>
+              <ol>
+                <li>
+                  <strong>Callbacks</strong> - Functions passed as arguments to be
+                  executed later
+                </li>
+                <li>
+                  <strong>Promises</strong> - Objects representing the eventual
+                  completion of an async operation
+                </li>
+                <li>
+                  <strong>Async/Await</strong> - Syntactic sugar built on top of
+                  promises
+                </li>
+              </ol>
+              <p>Here's an example using async/await:</p>
+              <pre><code>async function fetchData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}</code></pre>
+            </div>
+            <button class="completion-btn" data-lesson="2">Complete Lesson</button>
+          </div>
+
+          <div class="lesson" id="lesson3">
+            <div class="lesson-header">
+              <div class="lesson-title">Modules and Tooling</div>
+              <div class="lesson-duration">Duration: 25 min</div>
+            </div>
+            <div class="lesson-content">
+              <p>
+                Modern JavaScript applications are built using modules to organize
+                code into reusable pieces.
+              </p>
+              <p>
+                ES6 introduced native module support with <code>import</code> and
+                <code>export</code> statements:
+              </p>
+              <pre><code>// math.js
+export const add = (a, b) => a + b;
+export const subtract = (a, b) => a - b;
+
+// main.js
+import { add, subtract } from './math.js';
+console.log(add(2, 3)); // 5</code></pre>
+              <p>
+                For larger applications, you'll use bundlers like Webpack or Vite to
+                combine modules into optimized bundles for the browser.
+              </p>
+              <p>
+                You'll also use transpilers like Babel to convert modern JavaScript
+                into versions that work in older browsers.
+              </p>
+            </div>
+            <button class="completion-btn" data-lesson="3">Complete Lesson</button>
+          </div>
+
+          <div class="lesson" id="final-lesson">
+            <div class="lesson-header">
+              <div class="lesson-title">Course Completion</div>
+              <div class="lesson-duration">Final Step</div>
+            </div>
+            <div class="lesson-content">
+              <p>Congratulations! You've completed all lessons in this course.</p>
+              <p>
+                By mastering these concepts, you've taken a significant step toward
+                becoming a proficient JavaScript developer.
+              </p>
+              <p>
+                Remember that practice is key to mastering these concepts. Try
+                building small projects using what you've learned.
+              </p>
+              <p>
+                Now that you've completed the course, you'll receive your official
+                SmartLearn Certificate of Completion!
+              </p>
+            </div>
+            <button class="completion-btn" id="completeCourse">
+              Complete Course & Get Certificate
+            </button>
+          </div>
+        </div>
+
+        <!-- Certificate Modal -->
+        <div class="modal" id="certificateModal">
+          <div class="certificate">
+            <button class="close-modal" id="closeCertificate">&times;</button>
+            <div class="certificate-header">
+              <h2 class="certificate-title">Certificate of Completion</h2>
+              <p class="certificate-subtitle">This certifies that</p>
+            </div>
+            <div class="certificate-body">
+              <div class="certificate-name" id="userName">John Doe</div>
+              <p>has successfully completed the course</p>
+              <div class="certificate-course" id="certificateCourse">
+                Advanced JavaScript
+              </div>
+              <div class="certificate-date" id="certificateDate">June 15, 2023</div>
+            </div>
+              <div class="certificate-signatures">
+                <div class="signature">
+                  <div class="signature-line"></div>
+                  <p>Dr. Sarah Johnson</p>
+                  <p>Head of Curriculum</p>
+                </div>
+                <div class="signature">
+                  <div class="signature-line"></div>
+                  <p>Paul Mulilo</p>
+                  <p>CEO of SmartLearn</p>
+                </div>
+              </div>
+            <button class="download-btn" id="downloadCertificate">
+              Download Certificate
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Chatbot Toggle -->
+    <div class="chatbot-toggle-btn" id="floatingChatBtn">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="../home.html">Home</a>
+          <a href="../courses.html">Courses</a>
+          <a href="student.html">Students</a>
+          <a href="../chatbot.html">Chatbot</a>
+          <a href="../about.html">About</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+        <div class="copyright">
+          &copy; 2023 SmartLearn. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+              if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon','fa-sun');
+              } else {
+                icon.classList.replace('fa-sun','fa-moon');
+              }
+            }
+          });
+        }
+        function toggleChatbot(){ const c = document.getElementById('chatbotContainer'); if(!c) return; c.style.display = c.style.display==='none'?'flex':'none'; }
+        const sBtn = document.getElementById('chatbotToggle');
+        const fBtn = document.getElementById('floatingChatBtn');
+        if (sBtn) sBtn.addEventListener('click', toggleChatbot);
+        if (fBtn) fBtn.addEventListener('click', toggleChatbot);
+        const sendBtn = document.getElementById('sendBtn');
+        const userInput = document.getElementById('userInput');
+        const chatBox = document.getElementById('chatMessages');
+        function addMessage(message, isUser){ if(!chatBox) return; const div = document.createElement('div'); div.className = 'message ' + (isUser?'user-message':'bot-message'); div.textContent = message; chatBox.appendChild(div); chatBox.scrollTop = chatBox.scrollHeight; }
+        function getBotResponse(msg){ const m = msg.toLowerCase(); const map = { hello:"Hi there!", lesson:"Try completing the current lesson.", certificate:"Complete all lessons to unlock certificate.", default:"Ask about lessons or certificate." }; for(const k in map){ if(m.includes(k)) return map[k]; } return map.default; }
+        function handle(){ const val = userInput.value.trim(); if(!val) return; addMessage(val, true); userInput.value=''; setTimeout(()=> addMessage(getBotResponse(val), false), 500); }
+        if (sendBtn) sendBtn.addEventListener('click', handle);
+        if (userInput) userInput.addEventListener('keypress', (e)=>{ if(e.key==='Enter') handle(); });
+        let currentCourse = null;
+        try{ currentCourse = localStorage.getItem('currentCourseKey') || 'generic'; }catch(e){ currentCourse = 'generic'; }
+        let lastTitle = 'Course';
+        try{ lastTitle = localStorage.getItem('lastCourseTitle') || 'Course'; }catch(e){ lastTitle = 'Course'; }
+        const pageEl = document.querySelector('.course-content-page');
+        const certificateCourse = document.getElementById('certificateCourse');
+        const courseContents = {
+          'ict-introduction': {
+            icon: 'fa-network-wired',
+            desc: 'Foundational concepts and applications of ICT across sectors.',
+            lessons: [
+              { title: 'Introduction to ICT', duration: '10 min', content: '<p>ICT (Information and Communication Technology) refers to all technologies used to handle telecommunications, broadcast media, intelligent building management systems, audio-visual processing, and information systems. It covers computers, networks, the internet, mobile devices, and digital communication tools.</p>' },
+              { title: 'What ICT Is', duration: '10 min', content: '<p>ICT is the combination of information technology (IT) and communication technology. It includes the tools used to create, store, transmit, and manage information—such as computers, phones, networks, and internet services. ICT helps people communicate quickly and work more efficiently.</p>' },
+              { title: 'Types of Computers', duration: '15 min', content: '<p>Computers come in various forms depending on size and processing power. Common types include:</p><ul><li><strong>Supercomputers</strong> – extremely powerful machines for scientific research.</li><li><strong>Mainframe computers</strong> – used by large organizations for processing big data.</li><li><strong>Servers</strong> – manage network resources.</li><li><strong>Personal computers (PCs)</strong> – desktops and laptops for everyday use.</li><li><strong>Mobile devices</strong> – tablets and smartphones.</li></ul>' },
+              { title: 'Parts of a Computer', duration: '15 min', content: '<p>A computer consists of several key components:</p><ul><li><strong>CPU</strong> (Central Processing Unit) – the brain of the computer.</li><li><strong>RAM</strong> (Memory) – temporarily stores data being used.</li><li><strong>Storage devices</strong> – HDD/SSD for long-term data storage.</li><li><strong>Motherboard</strong> – connects all components.</li><li><strong>Power supply</strong> – provides electricity.</li><li><strong>Cooling system</strong> – keeps the computer from overheating.</li></ul>' },
+              { title: 'Input/Output Devices', duration: '15 min', content: '<p>Devices used to interact with a computer:</p><p><strong>Input Devices</strong></p><ul><li>Keyboard</li><li>Mouse</li><li>Scanner</li><li>Microphone</li><li>Touchscreen</li></ul><p><strong>Output Devices</strong></p><ul><li>Monitor</li><li>Printer</li><li>Speakers</li><li>Projector</li></ul><p>These devices allow users to enter information and receive results.</p>' },
+              { title: 'ICT in Education, Business, Health, etc.', duration: '20 min', content: '<p>ICT is used in many sectors:</p><ul><li><strong>Education</strong>: e-learning platforms, smart boards, online exams.</li><li><strong>Business</strong>: email communication, online marketing, cloud storage, automation.</li><li><strong>Health</strong>: electronic medical records, telemedicine, diagnostic machines.</li><li><strong>Government</strong>: e-government services, digital databases.</li><li><strong>Entertainment</strong>: streaming, gaming, digital media creation.</li></ul>' }
+            ]
+          }
+        };
+        const selected = courseContents[currentCourse];
+        if (pageEl){
+          const icon = selected ? selected.icon : 'fa-book';
+          const desc = selected ? selected.desc : ('You are learning: '+lastTitle);
+          let html = '';
+          html += '<div class="course-header">'
+            + '<div class="course-header-icon" id="courseIcon"><i class="fas '+icon+'"></i></div>'
+            + '<div class="course-header-info">'
+            + '<h1 id="courseTitle">'+lastTitle+'</h1>'
+            + '<p id="courseDescription">'+desc+'</p>'
+            + '</div>'
+            + '</div>';
+          const lessons = selected ? selected.lessons : [
+            { title: lastTitle+' Overview', duration: '10 min', content: '<p>Content coming soon.</p>' }
+          ];
+          lessons.forEach((ls, idx) => {
+            const n = idx+1;
+            html += '<div class="lesson" id="lesson'+n+'">'
+              + '<div class="lesson-header">'
+              + '<div class="lesson-title">'+ls.title+'</div>'
+              + '<div class="lesson-duration">Duration: '+ls.duration+'</div>'
+              + '</div>'
+              + '<div class="lesson-content">'+ls.content+'</div>'
+              + '<button class="completion-btn" data-lesson="'+n+'">Complete Lesson</button>'
+              + '</div>';
+          });
+          html += '<div class="lesson" id="final-lesson">'
+            + '<div class="lesson-header">'
+            + '<div class="lesson-title">Course Completion</div>'
+            + '<div class="lesson-duration">Final Step</div>'
+            + '</div>'
+            + '<div class="lesson-content">'
+            + '<p>Congratulations! You\'ve completed all lessons in this course.</p>'
+            + '</div>'
+            + '<button class="completion-btn" id="completeCourse">Complete Course & Get Certificate</button>'
+            + '</div>';
+          if (currentCourse==='ict-introduction'){
+            html += '<div id="quizSection" style="display:none; margin-top:16px;">'
+              + '<h2>ICT Quiz/Test</h2>'
+              + '<div id="quizA">'
+              + '<h3>Section A — Multiple Choice</h3>'
+              + '<div class="quiz-item"><p>ICT stands for:</p>'
+              + '<label><input type="radio" name="q1" value="A"> A. Information and Computer Technology</label>'
+              + '<label><input type="radio" name="q1" value="B"> B. Information and Communication Technology</label>'
+              + '<label><input type="radio" name="q1" value="C"> C. Internet and Coding Technology</label>'
+              + '<label><input type="radio" name="q1" value="D"> D. Integrated Computer Telecommunication</label></div>'
+              + '<div class="quiz-item"><p>Which of the following is NOT a type of computer?</p>'
+              + '<label><input type="radio" name="q2" value="A"> A. Supercomputer</label>'
+              + '<label><input type="radio" name="q2" value="B"> B. Laptop</label>'
+              + '<label><input type="radio" name="q2" value="C"> C. Scanner</label>'
+              + '<label><input type="radio" name="q2" value="D"> D. Mainframe</label></div>'
+              + '<div class="quiz-item"><p>The device considered the brain of the computer is the:</p>'
+              + '<label><input type="radio" name="q3" value="A"> A. RAM</label>'
+              + '<label><input type="radio" name="q3" value="B"> B. CPU</label>'
+              + '<label><input type="radio" name="q3" value="C"> C. Hard disk</label>'
+              + '<label><input type="radio" name="q3" value="D"> D. Monitor</label></div>'
+              + '<div class="quiz-item"><p>A device used to output information is:</p>'
+              + '<label><input type="radio" name="q4" value="A"> A. Keyboard</label>'
+              + '<label><input type="radio" name="q4" value="B"> B. Mouse</label>'
+              + '<label><input type="radio" name="q4" value="C"> C. Printer</label>'
+              + '<label><input type="radio" name="q4" value="D"> D. Microphone</label></div>'
+              + '<div class="quiz-item"><p>ICT is used in hospitals mainly for:</p>'
+              + '<label><input type="radio" name="q5" value="A"> A. Telemedicine and record keeping</label>'
+              + '<label><input type="radio" name="q5" value="B"> B. Growing plants</label>'
+              + '<label><input type="radio" name="q5" value="C"> C. Driving cars</label>'
+              + '<label><input type="radio" name="q5" value="D"> D. Building construction</label></div>'
+              + '<div class="quiz-item"><p>The main purpose of input devices is:</p>'
+              + '<label><input type="radio" name="q6" value="A"> A. To display data</label>'
+              + '<label><input type="radio" name="q6" value="B"> B. To store data</label>'
+              + '<label><input type="radio" name="q6" value="C"> C. To enter data into the computer</label>'
+              + '<label><input type="radio" name="q6" value="D"> D. To cool the computer</label></div>'
+              + '<div class="quiz-item"><p>Which component temporarily stores data while the computer is running?</p>'
+              + '<label><input type="radio" name="q7" value="A"> A. SSD</label>'
+              + '<label><input type="radio" name="q7" value="B"> B. CPU</label>'
+              + '<label><input type="radio" name="q7" value="C"> C. RAM</label>'
+              + '<label><input type="radio" name="q7" value="D"> D. ROM</label></div>'
+              + '</div>'
+              + '<div id="quizB">'
+              + '<h3>Section B — True or False</h3>'
+              + '<div class="quiz-item"><p>ICT helps in faster communication and easier access to information.</p>'
+              + '<label><input type="radio" name="t1" value="true"> True</label>'
+              + '<label><input type="radio" name="t1" value="false"> False</label></div>'
+              + '<div class="quiz-item"><p>A projector is an input device.</p>'
+              + '<label><input type="radio" name="t2" value="true"> True</label>'
+              + '<label><input type="radio" name="t2" value="false"> False</label></div>'
+              + '<div class="quiz-item"><p>Smartphones are considered a type of computer.</p>'
+              + '<label><input type="radio" name="t3" value="true"> True</label>'
+              + '<label><input type="radio" name="t3" value="false"> False</label></div>'
+              + '<div class="quiz-item"><p>The motherboard stores all long-term data.</p>'
+              + '<label><input type="radio" name="t4" value="true"> True</label>'
+              + '<label><input type="radio" name="t4" value="false"> False</label></div>'
+              + '<div class="quiz-item"><p>Used in business, ICT improves productivity and communication.</p>'
+              + '<label><input type="radio" name="t5" value="true"> True</label>'
+              + '<label><input type="radio" name="t5" value="false"> False</label></div>'
+              + '</div>'
+              + '<div id="quizC">'
+              + '<h3>Section C — Short Answer</h3>'
+              + '<div class="quiz-item"><p>Define ICT in your own words.</p><textarea id="s1"></textarea></div>'
+              + '<div class="quiz-item"><p>List two types of computers.</p><textarea id="s2"></textarea></div>'
+              + '<div class="quiz-item"><p>Name three input devices.</p><textarea id="s3"></textarea></div>'
+              + '<div class="quiz-item"><p>Explain one way ICT is used in education.</p><textarea id="s4"></textarea></div>'
+              + '<div class="quiz-item"><p>What is the function of the CPU?</p><textarea id="s5"></textarea></div>'
+              + '<div class="quiz-item"><p>Mention one difference between RAM and storage (HDD/SSD).</p><textarea id="s6"></textarea></div>'
+              + '<div class="quiz-item"><p>Give one example of an output device and its use.</p><textarea id="s7"></textarea></div>'
+              + '<div class="quiz-item"><p>List any two sectors where ICT is commonly used.</p><textarea id="s8"></textarea></div>'
+              + '</div>'
+              + '<div id="quizD">'
+              + '<h3>Section D — Matching Items</h3>'
+              + '<div class="quiz-item"><p>Match Column A with Column B.</p>'
+              + '<div><label>CPU</label><select id="m21"><option value="A">A. Stores long-term data</option><option value="B">B. Used to enter data</option><option value="C">C. Brain of the computer</option><option value="D">D. Displays information</option><option value="E">E. Temporary memory</option></select></div>'
+              + '<div><label>SSD/HDD</label><select id="m22"><option value="A">A. Stores long-term data</option><option value="B">B. Used to enter data</option><option value="C">C. Brain of the computer</option><option value="D">D. Displays information</option><option value="E">E. Temporary memory</option></select></div>'
+              + '<div><label>Keyboard</label><select id="m23"><option value="A">A. Stores long-term data</option><option value="B">B. Used to enter data</option><option value="C">C. Brain of the computer</option><option value="D">D. Displays information</option><option value="E">E. Temporary memory</option></select></div>'
+              + '<div><label>Monitor</label><select id="m24"><option value="A">A. Stores long-term data</option><option value="B">B. Used to enter data</option><option value="C">C. Brain of the computer</option><option value="D">D. Displays information</option><option value="E">E. Temporary memory</option></select></div>'
+              + '<div><label>RAM</label><select id="m25"><option value="A">A. Stores long-term data</option><option value="B">B. Used to enter data</option><option value="C">C. Brain of the computer</option><option value="D">D. Displays information</option><option value="E">E. Temporary memory</option></select></div>'
+              + '</div>'
+              + '<button class="btn" id="submitQuiz" style="margin-top:12px;">Submit Test</button>'
+              + '<div id="quizResult" style="margin-top:10px;"></div>'
+              + '</div>';
+          }
+          pageEl.innerHTML = html;
+        }
+        if (certificateCourse) certificateCourse.textContent = lastTitle;
+        const enrollNotice = document.getElementById('enrollNotice');
+        const goEnrollBtn = document.getElementById('goEnrollBtn');
+        function goToCourses(){ window.location.href = 'courses.html'; }
+        if (goEnrollBtn) goEnrollBtn.addEventListener('click', goToCourses);
+        if (!localStorage.getItem('currentCourseKey')){
+          if (enrollNotice && !localStorage.getItem('enrollNoticeShown')){
+            enrollNotice.style.display = 'block';
+            setTimeout(()=>{ enrollNotice.style.display='none'; goToCourses(); }, 2000);
+            try{ localStorage.setItem('enrollNoticeShown','1'); }catch(e){}
+          } else if (enrollNotice) {
+            enrollNotice.style.display = 'none';
+          }
+        }
+        function loadProgress(key){ try{ const raw = localStorage.getItem('progress_'+key); return raw?JSON.parse(raw):[] }catch(e){ return [] } }
+        function saveProgress(key,list){ try{ localStorage.setItem('progress_'+key, JSON.stringify(list)) }catch(e){} }
+        let completedLessons = loadProgress(currentCourse);
+        document.querySelectorAll('.lesson').forEach((lesson, idx) => { if (idx>0) lesson.style.display='none'; });
+        const totalLessons = document.querySelectorAll('.lesson').length - 1;
+        const quizSection = document.getElementById('quizSection');
+        const submitQuiz = document.getElementById('submitQuiz');
+        const quizResult = document.getElementById('quizResult');
+        const quizCompletedKey = 'quizCompleted_'+currentCourse;
+        const quizScoreKey = 'quizScore_'+currentCourse;
+        const completeCourseBtn = document.getElementById('completeCourse');
+        let studentIdNum = 0; try{ studentIdNum = parseInt(localStorage.getItem('studentId')||'0'); }catch(e){ studentIdNum = 0; }
+        if (completeCourseBtn){
+          const done = !!localStorage.getItem(quizCompletedKey);
+          if (!done){ completeCourseBtn.disabled = true; completeCourseBtn.textContent = 'Complete Course (Test Required)'; }
+        }
+        document.querySelectorAll('.completion-btn').forEach(btn => {
+          if (btn.id === 'completeCourse') return;
+          btn.addEventListener('click', () => {
+            const lessonNum = btn.getAttribute('data-lesson');
+            if (!completedLessons.includes(lessonNum)){
+              completedLessons.push(lessonNum);
+              saveProgress(currentCourse, completedLessons);
+            }
+            btn.textContent = 'Completed ✓';
+            btn.classList.add('btn-success');
+            btn.disabled = true;
+            const next = document.getElementById('lesson'+(parseInt(lessonNum)+1));
+            if (next) next.style.display='block';
+            if (quizSection){
+              if (completedLessons.length >= totalLessons){ quizSection.style.display='block'; }
+            }
+          });
+        });
+        completedLessons.forEach(lessonNum => {
+          const sec = document.getElementById('lesson'+lessonNum);
+          if (sec) sec.style.display='block';
+        });
+        const certificateModal = document.getElementById('certificateModal');
+        const closeCertificate = document.getElementById('closeCertificate');
+        const downloadCertificate = document.getElementById('downloadCertificate');
+        const userName = document.getElementById('userName');
+        const certificateDate = document.getElementById('certificateDate');
+        if (submitQuiz){
+          submitQuiz.addEventListener('click', () => {
+            let score = 0;
+            const mcAns = { q1:'B', q2:'C', q3:'B', q4:'C', q5:'A', q6:'C', q7:'C' };
+            Object.keys(mcAns).forEach(k => { const sel = document.querySelector('input[name="'+k+'"]:checked'); if (sel && sel.value===mcAns[k]) score += 1; });
+            const tfAns = { t1:'true', t2:'false', t3:'true', t4:'false', t5:'true' };
+            Object.keys(tfAns).forEach(k => { const sel = document.querySelector('input[name="'+k+'"]:checked'); if (sel && sel.value===tfAns[k]) score += 1; });
+            const mAns = { m21:'C', m22:'A', m23:'B', m24:'D', m25:'E' };
+            Object.keys(mAns).forEach(k => { const sel = document.getElementById(k); if (sel && sel.value===mAns[k]) score += 1; });
+            const totalAuto = 7+5+5;
+            const percent = Math.round((score/totalAuto)*100);
+            if (quizResult) quizResult.textContent = 'Score: '+score+' / '+totalAuto+' ('+percent+'%)';
+            try{ localStorage.setItem(quizCompletedKey, '1'); localStorage.setItem(quizScoreKey, String(percent)); }catch(e){}
+            const collectAnswers = () => {
+              const ans = { mc:{}, tf:{}, match:{}, short:{} };
+              ['q1','q2','q3','q4','q5','q6','q7'].forEach(k => { const sel = document.querySelector('input[name="'+k+'"]:checked'); ans.mc[k] = sel ? sel.value : null; });
+              ['t1','t2','t3','t4','t5'].forEach(k => { const sel = document.querySelector('input[name="'+k+'"]:checked'); ans.tf[k] = sel ? sel.value : null; });
+              ['m21','m22','m23','m24','m25'].forEach(k => { const el = document.getElementById(k); ans.match[k] = el ? el.value : null; });
+              ['s1','s2','s3','s4','s5','s6','s7','s8'].forEach(k => { const el = document.getElementById(k); ans.short[k] = el ? el.value.trim() : ''; });
+              return ans;
+            };
+            const answersPayload = collectAnswers();
+            try{
+              const raw = localStorage.getItem('assignmentSubmissions');
+              const list = raw ? JSON.parse(raw) : [];
+              const studentName = (function(){ try{ return localStorage.getItem('studentDisplayName') || localStorage.getItem('studentName') || 'Student' }catch(e){ return 'Student' } })();
+              list.push({ id: Date.now(), type:'quiz', course: lastTitle, courseKey: currentCourse, fileName: 'ICT Quiz/Test', student: studentName, submittedAt: new Date().toLocaleString(), status:'submitted', answers: answersPayload, autoScorePercent: percent, autoScoreTotal: totalAuto });
+              localStorage.setItem('assignmentSubmissions', JSON.stringify(list));
+            }catch(e){}
+            try{
+              const sid = parseInt(localStorage.getItem('studentId')||'0');
+              if (sid) {
+                fetch('http://127.0.0.1:5000/submissions', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ student_id: sid, course_key: currentCourse, assignment_id: null, file_name: 'ICT Quiz/Test', answers_json: JSON.stringify(answersPayload), auto_score_percent: percent, status: 'submitted' }) }).then(()=>{}).catch(()=>{});
+              }
+            }catch(e){}
+            if (completeCourseBtn){ completeCourseBtn.disabled=true; completeCourseBtn.textContent='Awaiting lecturer review'; }
+            alert('Test submitted. Awaiting lecturer review and admin approval.');
+          });
+        }
+        function checkCertificationAccess(){ if(!completeCourseBtn) return; fetch('http://127.0.0.1:5000/submissions?student_id='+studentIdNum+'&course_key='+currentCourse).then(r=>r.json()).then(list => { const latest = list && list.length ? list[0] : null; if(latest && latest.admin_approved){ completeCourseBtn.disabled=false; completeCourseBtn.textContent='Complete Course & Get Certificate'; } else { completeCourseBtn.disabled=true; completeCourseBtn.textContent='Awaiting admin approval'; } }).catch(()=>{}); }
+        if(studentIdNum){ checkCertificationAccess(); }
+        function addCompletion(record){ try{ const raw = localStorage.getItem('completions'); const list = raw?JSON.parse(raw):[]; list.push(record); localStorage.setItem('completions', JSON.stringify(list)); let cl = JSON.parse(localStorage.getItem('completionsList')||'[]'); cl.push(record); localStorage.setItem('completionsList', JSON.stringify(cl)); }catch(e){} }
+        if (completeCourseBtn){ completeCourseBtn.addEventListener('click', () => {
+          const doneQuiz = !!localStorage.getItem(quizCompletedKey);
+          const requiredLessons = totalLessons>0 ? totalLessons : 3;
+          if (!doneQuiz){ alert('Please complete the test to proceed.'); return; }
+          if (completedLessons.length >= requiredLessons){
+            if(studentIdNum){ try{ fetch('http://127.0.0.1:5000/submissions?student_id='+studentIdNum+'&course_key='+currentCourse).then(r=>r.json()).then(list => { const latest = list && list.length ? list[0] : null; if(!latest || !latest.admin_approved){ alert('Your certificate is awaiting admin approval.'); return; } }).catch(()=>{}); }catch(e){} }
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+            let name = 'Student'; try{ name = localStorage.getItem('studentDisplayName') || localStorage.getItem('studentName') || 'Student'; }catch(e){}
+            if (userName) userName.textContent = name;
+            if (certificateDate) certificateDate.textContent = dateStr;
+            let quizScore = null; try{ quizScore = localStorage.getItem(quizScoreKey); }catch(e){}
+            const record = { id: Date.now(), student: name, courseKey: currentCourse, courseTitle: lastTitle, date: dateStr, status:'approved', style:'gold', score:quizScore, reviewed:true };
+            addCompletion(record);
+            if (certificateModal) certificateModal.style.display='block';
+            alert('Course completed! Your certificate is ready.');
+          } else {
+            alert('Please complete all lessons before submitting for approval.');
+          }
+        }); }
+        if (closeCertificate){ closeCertificate.addEventListener('click', () => { if(certificateModal) certificateModal.style.display='none'; }); }
+        if (downloadCertificate){ downloadCertificate.addEventListener('click', () => { window.location.href = 'certificate.html'; }); }
+      })();
+    </script>
+  </body>
+</html>

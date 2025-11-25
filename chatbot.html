@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmartLearn - Chatbot</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn</span>
+      </div>
+      <div class="nav-links">
+        <a href="home.html" class="nav-link" data-page="home">Home</a>
+        <a href="courses.html" class="nav-link" data-page="courses">Courses</a>
+        <a href="about.html" class="nav-link" data-page="about">About</a>
+        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="chatbot-toggle" id="chatbotToggle">
+          <i class="fas fa-comment-alt"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Chatbot Page -->
+    <section class="chatbot-full">
+      <div
+        class="chatbot-container"
+        id="chatbotContainer"
+        style="display: flex"
+      >
+        <div class="chatbot-header">
+          <h3><i class="fas fa-robot"></i> SmartLearn AI Tutor</h3>
+          <button class="close-chat" id="closeChat">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            Hello! I'm your SmartLearn Assistant. What topic would you like help
+            with?
+          </div>
+        </div>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="userInput"
+            placeholder="Type your message..."
+          />
+          <button id="sendBtn">Send</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Chatbot Toggle -->
+    <div class="chatbot-toggle-btn" id="floatingChatBtn">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="home.html">Home</a>
+          <a href="courses.html">Courses</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          &copy; 2023 SmartLearn. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+              if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon','fa-sun');
+              } else {
+                icon.classList.replace('fa-sun','fa-moon');
+              }
+            }
+          });
+        }
+        function toggleChatbot(){ const c = document.getElementById('chatbotContainer'); if(!c) return; c.style.display = c.style.display==='none'?'flex':'none'; }
+        const sBtn = document.getElementById('chatbotToggle');
+        const fBtn = document.getElementById('floatingChatBtn');
+        if (sBtn) sBtn.addEventListener('click', toggleChatbot);
+        if (fBtn) fBtn.addEventListener('click', toggleChatbot);
+        const sendBtn = document.getElementById('sendBtn');
+        const userInput = document.getElementById('userInput');
+        const chatBox = document.getElementById('chatMessages');
+        function addMessage(message, isUser){ if(!chatBox) return; const div = document.createElement('div'); div.className = 'message ' + (isUser?'user-message':'bot-message'); div.textContent = message; chatBox.appendChild(div); chatBox.scrollTop = chatBox.scrollHeight; }
+        function getBotResponse(msg){ const m = msg.toLowerCase(); const map = { hello:"Hi there!", help:"Ask your learning question.", default:"Ask about learning topics." }; for(const k in map){ if(m.includes(k)) return map[k]; } return map.default; }
+        function handle(){ const val = userInput.value.trim(); if(!val) return; addMessage(val, true); userInput.value=''; setTimeout(()=> addMessage(getBotResponse(val), false), 500); }
+        if (sendBtn) sendBtn.addEventListener('click', handle);
+        if (userInput) userInput.addEventListener('keypress', (e)=>{ if(e.key==='Enter') handle(); });
+      })();
+    </script>
+  </body>
+</html>

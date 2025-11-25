@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Management | SmartLearn Admin</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="admin.html">Admin Dashboard</a></nav></header>
+  <main class="main-content page-admin-content" style="padding:1rem">
+    <h2 class="section-title">Content Management</h2>
+    <div class="table-container">
+      <h3>Uploaded Materials</h3>
+      <table><thead><tr><th>Title</th><th>File</th><th>Type</th><th>Course</th><th>Date</th><th>Actions</th></tr></thead><tbody id="adminContentTable"></tbody></table>
+    </div>
+    <div class="table-container"><h3>Announcements</h3><ul id="adminContentAnnouncements"></ul></div>
+    <div class="table-container"><h3>Forum Activity</h3><ul id="adminContentForum"></ul></div>
+    <div class="table-container"><h3>Flagged Posts</h3><ul id="adminContentFlags"></ul></div>
+  </main>
+  <script>
+    function loadMaterials(){ try{ const r = localStorage.getItem('materials'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function saveMaterials(list){ try{ localStorage.setItem('materials', JSON.stringify(list)) }catch(e){} }
+    function pushAdminLog(text){ try{ const r = localStorage.getItem('adminLogs'); const list = r?JSON.parse(r):[]; list.unshift({ ts:new Date().toLocaleString(), text }); localStorage.setItem('adminLogs', JSON.stringify(list)); }catch(e){} }
+    function loadAnnouncements(){ try{ const data = localStorage.getItem('studentAnnouncements'); return data ? JSON.parse(data) : []; }catch(e){ return [] } }
+    function initializeAdminContentPage(){ const root = document.querySelector('.page-admin-content'); if(!root) return; const table = document.getElementById('adminContentTable'); const annList = document.getElementById('adminContentAnnouncements'); const forumList = document.getElementById('adminContentForum'); const flagList = document.getElementById('adminContentFlags'); const mats = loadMaterials(); table.innerHTML = mats.map(m => `<tr><td>${m.title}</td><td>${m.fileName||''}</td><td>${m.type}</td><td>${m.courseKey}</td><td>${new Date(m.id).toLocaleString()}</td><td><button class="btn" data-del="${m.id}">Delete</button></td></tr>`).join(''); table.querySelectorAll('button[data-del]').forEach(b => { b.addEventListener('click', () => { const id = parseInt(b.getAttribute('data-del')); const list = loadMaterials().filter(x=>x.id!==id); saveMaterials(list); pushAdminLog('Deleted material '+id); initializeAdminContentPage(); }); }); const anns = loadAnnouncements(); if(annList) annList.innerHTML = anns.map(a=>`<li>${a.date} · ${a.message}</li>`).join(''); if(forumList) forumList.innerHTML = '<li>No forum entries</li>'; if(flagList) flagList.innerHTML = '<li>No flags</li>'; }
+    initializeAdminContentPage();
+  </script>
+  </body>
+  </html>

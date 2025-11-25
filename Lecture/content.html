@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLearn - Course Content Editor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .editor-page { padding: 2rem 5%; max-width: 1400px; margin: 0 auto }
+      .editor-grid { display: grid; grid-template-columns: 420px 1fr; gap: 1.5rem }
+      @media (max-width: 992px) { .editor-grid { grid-template-columns: 1fr } }
+      .panel { background: white; border-radius: 12px; box-shadow: var(--box-shadow); padding: 1rem }
+      .panel h3 { margin-bottom: 0.8rem; color: var(--primary) }
+      .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem }
+      .form-group { margin-bottom: 0.8rem }
+      .form-group label { display: block; margin-bottom: 0.3rem; font-weight: 600 }
+      .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.6rem 0.8rem; border: 2px solid var(--light-gray); border-radius: 8px }
+      .list { display: flex; flex-direction: column; gap: 0.6rem }
+      .list-item { background: var(--light); border-radius: 10px; padding: 0.8rem; display: flex; align-items: center; gap: 0.8rem }
+      .drag { cursor: grab; color: var(--gray) }
+      .item-title { font-weight: 600 }
+      .item-actions { margin-left: auto; display: flex; gap: 0.5rem }
+      .preview { background: white; border-radius: 12px; box-shadow: var(--box-shadow); padding: 1rem }
+      .preview h3 { margin-bottom: 1rem; color: var(--primary) }
+      .preview-block { background: var(--light); border-radius: 10px; padding: 1rem; margin-bottom: 1rem }
+      .quiz { background: var(--light); border-radius: 10px; padding: 1rem; margin-top: 1rem }
+      iframe { width: 100%; height: 320px; border: 0; border-radius: 10px }
+      .toolbar { display:flex; justify-content: space-between; align-items: center; margin-bottom: 1rem }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="../home.html" class="logo"><i class="fas fa-brain"></i><span>SmartLearn</span></a>
+      <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+      <div class="nav-links">
+        <a href="../home.html" class="nav-link">Home</a>
+        <a href="../lecturer.html" class="nav-link">Lecturer</a>
+        <a href="../Admin/courses.html" class="nav-link">Admin Courses</a>
+      </div>
+      <div class="nav-icons">
+        <div class="role-indicator"><i class="fas fa-chalkboard-teacher"></i><span>Lecturer</span></div>
+        <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+      </div>
+    </nav>
+    <section class="editor-page">
+      <div class="toolbar">
+        <div class="form-group" style="flex:1; max-width: 420px">
+          <label for="courseSelect">Assigned Course</label>
+          <select id="courseSelect"></select>
+        </div>
+        <button id="newCourseContent" class="btn">New Content Set</button>
+      </div>
+      <div class="editor-grid">
+        <div class="panel">
+          <h3>Lectures</h3>
+          <div class="form-group"><label for="lectureTitle">Title</label><input id="lectureTitle" type="text" /></div>
+          <div class="form-row">
+            <div class="form-group"><label for="lectureType">Type</label><select id="lectureType"><option value="video">Video</option><option value="pdf">PDF</option><option value="note">Note</option></select></div>
+            <div class="form-group"><label for="lectureDuration">Duration</label><input id="lectureDuration" type="text" placeholder="e.g., 15 min" /></div>
+          </div>
+          <div class="form-group"><label for="videoUrl">YouTube Link</label><input id="videoUrl" type="text" placeholder="https://www.youtube.com/watch?v=..." /></div>
+          <div class="form-group"><label for="pdfUrl">PDF URL</label><input id="pdfUrl" type="text" placeholder="https://.../file.pdf" /></div>
+          <div class="form-group"><label for="noteText">Notes</label><textarea id="noteText" rows="3" placeholder="Write lecture notes"></textarea></div>
+          <button id="addLectureBtn" class="btn btn-primary" style="width:100%">Add Lecture</button>
+          <div style="margin-top:1rem">
+            <div class="list" id="lecturesList"></div>
+          </div>
+          <h3 style="margin-top:1rem">Quiz Builder</h3>
+          <div class="form-group"><label for="quizQuestion">Question</label><input id="quizQuestion" type="text" /></div>
+          <div class="form-row">
+            <div class="form-group"><label for="quizA">Option A</label><input id="quizA" type="text" /></div>
+            <div class="form-group"><label for="quizB">Option B</label><input id="quizB" type="text" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="quizC">Option C</label><input id="quizC" type="text" /></div>
+            <div class="form-group"><label for="quizD">Option D</label><input id="quizD" type="text" /></div>
+          </div>
+          <div class="form-group"><label for="quizCorrect">Correct</label><select id="quizCorrect"><option value="0">A</option><option value="1">B</option><option value="2">C</option><option value="3">D</option></select></div>
+          <button id="addQuizBtn" class="btn" style="width:100%">Add Quiz</button>
+          <div style="margin-top:1rem">
+            <div class="list" id="quizzesList"></div>
+          </div>
+          <button id="saveAllBtn" class="btn btn-success" style="width:100%; margin-top:0.6rem">Save All Changes</button>
+        </div>
+        <div class="preview">
+          <h3>Student Preview</h3>
+          <div id="previewArea"></div>
+        </div>
+      </div>
+    </section>
+    <div class="chatbot-toggle-btn" id="floatingChatBtn"><i class="fas fa-comment"></i></div>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links"><a href="../contact.html">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+        <div class="copyright">&copy; 2025 SmartLearn. All rights reserved.</div>
+      </div>
+    </footer>
+    <script src="../scripts.js"></script>
+    <script src="js/content.js"></script>
+  </body>
+  </html>

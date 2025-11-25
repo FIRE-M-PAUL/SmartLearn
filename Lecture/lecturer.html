@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLearn - Lecturer Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn</span>
+      </div>
+      <div class="nav-links">
+        <a href="home.html" class="nav-link" data-page="home">Home</a>
+        <a href="courses.html" class="nav-link" data-page="courses">Courses</a>
+        <a href="student.html" class="nav-link" data-page="student">Students</a>
+        <a href="lecturer.html" class="nav-link active" data-page="lecturer"
+          >Lecturers</a
+        >
+        <a href="admin.html" class="nav-link" data-page="admin">Admin</a>
+        <a href="chatbot.html" class="nav-link" data-page="chatbot">Chatbot</a>
+        <a href="about.html" class="nav-link" data-page="about">About</a>
+        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <div class="role-indicator">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span>Lecturer</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="chatbot-toggle" id="chatbotToggle">
+          <i class="fas fa-comment-alt"></i>
+        </button>
+      </div>
+    </nav>
+    <!-- Lecturer Dashboard -->
+    <div class="dashboard lecturer-dashboard">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>Lecturer Dashboard</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="lecturer.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+          </li>
+          <li>
+            <a href="Courses.html"><i class="fas fa-book"></i> My Courses</a>
+          </li>
+          <li>
+            <a href="UploadMaterials.html"><i class="fas fa-file-upload"></i> Upload Materials</a>
+          </li>
+          <li>
+            <a href="Assignments.html"><i class="fas fa-tasks"></i> Assignments</a>
+          </li>
+          <li>
+            <a href="ChatWithStudents.html"><i class="fas fa-comments"></i> Messages</a>
+          </li>
+          <li>
+            <a href="AIAssistant.html" id="aiAssistant"><i class="fas fa-robot"></i> AI Assistant</a>
+          </li>
+          <li>
+            <a href="Grading.html"><i class="fas fa-check"></i> Grading</a>
+          </li>
+          <li>
+            <a href="Announcements.html"><i class="fas fa-bullhorn"></i> Announcements</a>
+          </li>
+          <li>
+            <a href="ProfileManagement.html"><i class="fas fa-user"></i> Profile</a>
+          </li>
+          <li>
+            <a href="Settings.html"><i class="fas fa-cog"></i> Settings</a>
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <section id="lec-dashboard" class="content-section active">
+        <h2 class="section-title" id="lecWelcome">Welcome</h2>
+
+        <div class="dashboard-cards" id="lecQuickStats">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Courses Taught</div>
+              <div class="card-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+            </div>
+            <div class="card-value" id="statCourses">0</div>
+            <p>Assigned to you</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Enrolled Students</div>
+              <div class="card-icon">
+                <i class="fas fa-users"></i>
+              </div>
+            </div>
+            <div class="card-value" id="statStudents">0</div>
+            <p>Across your courses</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Pending Grading</div>
+              <div class="card-icon">
+                <i class="fas fa-file-alt"></i>
+              </div>
+            </div>
+            <div class="card-value" id="statPending">0</div>
+            <p>Awaiting review</p>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">New Messages</div>
+              <div class="card-icon"><i class="fas fa-envelope"></i></div>
+            </div>
+            <div class="card-value" id="statMessages">0</div>
+            <p>Recent communications</p>
+          </div>
+        </div>
+        <div class="table-container" id="lecRecentActivities">
+          <h3>Recent Activities</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem">
+            <div class="card"><div class="card-header"><div class="card-title">Last Material</div><div class="card-icon"><i class="fas fa-file-upload"></i></div></div><div class="card-value" id="recentMaterial">None</div></div>
+            <div class="card"><div class="card-header"><div class="card-title">Latest Announcement</div><div class="card-icon"><i class="fas fa-bullhorn"></i></div></div><div class="card-value" id="recentAnnouncement">None</div></div>
+            <div class="card"><div class="card-header"><div class="card-title">Recent Submission</div><div class="card-icon"><i class="fas fa-paperclip"></i></div></div><div class="card-value" id="recentSubmission">None</div></div>
+          </div>
+        </div>
+
+        <div class="table-container" id="lecUpcoming">
+          <h3>Upcoming Deadlines</h3>
+          <table>
+            <thead><tr><th>Title</th><th>Course</th><th>Type</th><th>Due</th></tr></thead>
+            <tbody id="lecUpcomingList"></tbody>
+          </table>
+        </div>
+
+        <div class="table-container" id="lecQuickActions">
+          <h3>Shortcuts</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:0.8rem">
+            <a href="Courses.html" class="btn">View Courses</a>
+            <a href="UploadMaterials.html" class="btn">Upload Materials</a>
+            <a href="Assignments.html" class="btn">Create Assignment</a>
+            <a href="StudentPerformance.html" class="btn">View Performance</a>
+            <a href="Announcements.html" class="btn">Post Announcement</a>
+            <a href="ChatWithStudents.html" class="btn">Open Messages</a>
+          </div>
+        </div>
+        </section>
+
+        <section id="lec-courses" class="content-section">
+        <h2 class="section-title">Course Management</h2>
+        <div class="table-container">
+          <h3>My Courses</h3>
+          <div style="display:flex;gap:1rem;margin-bottom:1rem;align-items:center">
+            <select id="lecturerCourseSelect" style="padding:0.5rem;border:1px solid var(--light-gray);border-radius:8px">
+              <option value="ict">Information Technology</option>
+              <option value="cs">Computer Studies</option>
+              <option value="ce">Computer Engineering</option>
+            </select>
+            <button class="btn btn-primary" id="lecturerAddCourseBtn">Add New Course</button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Course Name</th>
+                <th>Students</th>
+                <th>Completion</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="lecturerCoursesTableBody"></tbody>
+          </table>
+        </div>
+        </section>
+
+        <section id="lec-materials" class="content-section">
+        <h2 class="section-title">Upload Course Materials</h2>
+        <div class="table-container">
+          <h3>Upload Course Materials</h3>
+          <form id="lecturerMaterialsForm" enctype="multipart/form-data" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end">
+            <div>
+              <label>Course</label>
+              <select id="lecturerMaterialCourse">
+                <option value="ict">Information Technology</option>
+                <option value="cs">Computer Studies</option>
+                <option value="ce">Computer Engineering</option>
+              </select>
+            </div>
+            <div>
+              <label>Title</label>
+              <input type="text" id="lecturerMaterialTitle" placeholder="e.g., Async/Await Notes" />
+            </div>
+            <div>
+              <label>Type</label>
+              <select id="lecturerMaterialType">
+                <option value="pdf">PDF</option>
+                <option value="ppt">PowerPoint</option>
+                <option value="image">Image</option>
+                <option value="video">Video</option>
+                <option value="notes">Notes</option>
+              </select>
+            </div>
+            <div>
+              <label>File</label>
+              <input type="file" id="lecturerMaterialFile" />
+            </div>
+            <button class="btn btn-primary" type="submit">Upload</button>
+          </form>
+          <div style="margin-top:1rem">
+            <h4>Materials</h4>
+            <ul id="lecturerMaterialsList"></ul>
+          </div>
+        </div>
+        </section>
+
+        <section id="lec-assignments" class="content-section">
+        <h2 class="section-title">Create Assignments / Tests</h2>
+        <div class="table-container">
+          <h3>Create Assignments / Tests</h3>
+          <form id="lecturerAssignmentForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end">
+            <div>
+              <label>Course</label>
+              <select id="lecturerAssignmentCourse">
+                <option value="ict">Information Technology</option>
+                <option value="cs">Computer Studies</option>
+                <option value="ce">Computer Engineering</option>
+              </select>
+            </div>
+            <div>
+              <label>Title</label>
+              <input type="text" id="lecturerAssignmentTitle" placeholder="e.g., React Components Quiz" />
+            </div>
+            <div>
+              <label>Type</label>
+              <select id="lecturerAssignmentType">
+                <option value="assignment">Assignment</option>
+                <option value="quiz">Quiz</option>
+                <option value="test">Test</option>
+              </select>
+            </div>
+            <div>
+              <label>Due Date</label>
+              <input type="datetime-local" id="lecturerAssignmentDue" />
+            </div>
+            <button class="btn btn-primary" type="submit">Create</button>
+          </form>
+          <div style="margin-top:1rem">
+            <h4>Assignments</h4>
+            <table>
+              <thead><tr><th>Title</th><th>Course</th><th>Type</th><th>Due</th></tr></thead>
+              <tbody id="lecturerAssignmentsList"></tbody>
+            </table>
+          </div>
+        </div>
+        </section>
+
+        <section id="lec-grading" class="content-section">
+        <h2 class="section-title">Submissions & Grading</h2>
+        <div class="table-container">
+          <h3>Submissions</h3>
+          <table>
+            <thead><tr><th>Student</th><th>Course</th><th>File</th><th>Submitted</th><th>Grade</th><th>Feedback</th><th>Action</th></tr></thead>
+            <tbody id="lecturerSubmissionsList"></tbody>
+          </table>
+        </div>
+        </section>
+
+        <section id="lec-performance" class="content-section">
+        <h2 class="section-title">Student Performance</h2>
+        <div class="table-container">
+          <h3>Student Performance</h3>
+          <div id="lecturerAnalytics" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem"></div>
+          <div style="margin-top:1rem">
+            <h4>Enrolled Students</h4>
+            <table>
+              <thead><tr><th>Name</th><th>Course</th></tr></thead>
+              <tbody id="lecturerStudentsList"></tbody>
+            </table>
+          </div>
+        </div>
+        </section>
+
+        <section id="lec-announcements" class="content-section">
+        <h2 class="section-title">Announcements</h2>
+        <div class="table-container">
+          <h3>Post Announcements</h3>
+          <form id="lecturerAnnouncementsForm" style="display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:end">
+            <input type="text" id="lecturerAnnouncementText" placeholder="Enter announcement text" />
+            <button class="btn btn-primary" type="submit">Post</button>
+          </form>
+        </div>
+        </section>
+
+        <section id="lec-messages" class="content-section">
+        <h2 class="section-title">Communication / Messages</h2>
+        <div class="table-container">
+          <h3>Communicate with Students</h3>
+          <form id="lecturerMessageForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end">
+            <div>
+              <label>Target</label>
+              <select id="lecturerMessageTarget">
+                <option value="course:javascript">Course: Advanced JavaScript</option>
+                <option value="course:design">Course: UI/UX Design</option>
+                <option value="course:ml">Course: Machine Learning</option>
+              </select>
+            </div>
+            <div style="grid-column:1/-1">
+              <input type="text" id="lecturerMessageText" placeholder="Type a message to the class or student" />
+            </div>
+            <button class="btn btn-primary" type="submit">Send</button>
+          </form>
+        </div>
+        </section>
+
+        <section id="lec-profile" class="content-section">
+        <h2 class="section-title">Profile Management</h2>
+        <div class="table-container">
+          <h3>Profile Management</h3>
+          <form id="lecturerProfileForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+            <input type="text" id="lecturerName" placeholder="Name" />
+            <input type="email" id="lecturerEmail" placeholder="Email" />
+            <input type="password" id="lecturerPassword" placeholder="Password" />
+            <input type="text" id="lecturerContact" placeholder="Contact" />
+            <input type="file" id="lecturerAvatar" accept="image/*" />
+            <button class="btn btn-primary" type="submit">Save Profile</button>
+          </form>
+        </div>
+        </section>
+
+        <section id="lec-settings" class="content-section">
+        <h2 class="section-title">Settings</h2>
+        <div class="table-container">
+          <h3>Dashboard Settings</h3>
+          <form id="lecturerSettingsForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+            <label><input type="checkbox" id="lecNotif" /> Notifications</label>
+            <label><input type="checkbox" id="lecDark" /> Dark Theme</label>
+            <label><input type="checkbox" id="lecComm" /> Allow student DMs</label>
+            <button class="btn btn-primary" type="submit">Save</button>
+          </form>
+        </div>
+        </section>
+
+        <div class="table-container">
+          <h3>Recent Assignments</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>Course</th>
+                <th>Assignment</th>
+                <th>Status</th>
+                <th>Grade</th>
+              </tr>
+            </thead>
+            <tbody id="recentAssignmentsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Chatbot Toggle -->
+    <div class="chatbot-toggle-btn" id="floatingChatBtn">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="home.html">Home</a>
+          <a href="courses.html">Courses</a>
+          <a href="student.html">Students</a>
+          <a href="lecturer.html">Lecturers</a>
+          <a href="admin.html">Admin</a>
+          <a href="chatbot.html">Chatbot</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          &copy; 2023 SmartLearn. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+    <script>
+      (function(){
+        function loadLocalSubs(){ try{ const r = localStorage.getItem('assignmentSubmissions'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+        function render(table, items){ table.innerHTML = items.length ? items.map(s => `<tr><td>${s.student||('ID: '+(s.student_id||'-'))}</td><td>${s.course||s.courseKey||'-'}</td><td>${s.fileName||'Submission'}</td><td><span style="color: var(--warning)">${s.status||'submitted'}</span></td><td>${s.grade||'-'}</td></tr>`).join('') : '<tr><td colspan="5">No recent submissions</td></tr>'; }
+        const table = document.getElementById('recentAssignmentsTable');
+        const local = loadLocalSubs();
+        if(local.length){ render(table, local.slice(-10).reverse()); }
+        else { fetch('http://127.0.0.1:5000/submissions').then(r=>r.json()).then(data => { render(table, data.slice(0,10)); }).catch(()=>{ render(table, []); }); }
+      })();
+    </script>
+  </body>
+</html>

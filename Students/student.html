@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLearn - Student Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <a href="../home.html" class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn📘</span>
+      </a>
+      <div class="nav-icons">
+        <div class="role-indicator">
+          <i class="fas fa-user-graduate"></i>
+          <span>Student</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Student Dashboard -->
+    <div class="dashboard">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>Student Dashboard</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="#" id="dashboard-link" class="active"
+              ><i class="fas fa-home"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="courses.html" id="courses"
+              ><i class="fas fa-book"></i> My Courses</a
+            >
+          </li>
+          <li>
+            <a href="progress.html" id="progress" class="nav-link"
+              ><i class="fas fa-chart-line"></i> Progress</a
+            >
+          </li>
+          <li>
+            <a href="messages.html" id="messages" class="nav-link"
+              ><i class="fas fa-comments"></i> Messages</a
+            >
+          </li>
+          <li>
+            <a href="settings.html" id="settings-link"
+              ><i class="fas fa-cog"></i> Settings</a
+            >
+          </li>
+          <li>
+            <button id="chatbotToggle" class="sidebar-btn"
+              ><i class="fas fa-robot"></i> Ask AI Tutor</button
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div class="dashboard-topbar" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;background:white;padding:1rem;border-radius:12px;box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+          <div style="display:flex;align-items:center;gap:1rem;">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--primary);color:white;display:flex;align-items:center;justify-content:center;font-weight:700;">S</div>
+            <div>
+              <div style="font-weight:700;font-size:1rem;">Student</div>
+              <div style="color:var(--gray);font-size:0.9rem;">Active</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:0.8rem;">
+            <button id="topNotifications" class="btn" style="padding:0.5rem 0.8rem;"><i class="fas fa-bell"></i></button>
+            <button id="topMessages" class="btn" style="padding:0.5rem 0.8rem;"><i class="fas fa-envelope"></i></button>
+            <button id="logoutTop" class="btn" style="background:var(--danger);color:white;">Logout</button>
+          </div>
+        </div>
+
+        <div class="welcome" style="background:linear-gradient(135deg, var(--primary), var(--secondary));color:white;border-radius:12px;padding:2rem;margin-bottom:2rem;box-shadow: var(--box-shadow);">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+            <div>
+              <h2 id="welcomeName" style="margin:0 0 0.5rem;">Welcome, Student!</h2>
+              <div style="opacity:0.9;">Ready to continue learning?</div>
+            </div>
+            <button id="continueLearningBtn" class="btn btn-primary">Continue Learning</button>
+          </div>
+        </div>
+
+        <div class="table-container" style="margin-top:1rem;">
+          <h3>Course Materials</h3>
+          <ul id="studentMaterialsList"></ul>
+        </div>
+        <div class="table-container" style="margin-top:1rem;">
+          <h3>Notifications</h3>
+          <ul id="studentNotificationsList"></ul>
+        </div>
+
+        <div class="quick-access" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-bottom:2rem;">
+          <a href="courses.html" class="card" style="text-align:center;">
+            <div class="card-icon"><i class="fas fa-book"></i></div>
+            <div class="card-title">My Courses</div>
+          </a>
+          <a href="progress.html" class="card" style="text-align:center;">
+            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="card-title">Progress</div>
+          </a>
+          <a href="messages.html" class="card" style="text-align:center;">
+            <div class="card-icon"><i class="fas fa-comments"></i></div>
+            <div class="card-title">Messages</div>
+          </a>
+          <a href="settings.html" class="card" style="text-align:center;">
+            <div class="card-icon"><i class="fas fa-cog"></i></div>
+            <div class="card-title">Settings</div>
+          </a>
+          <a href="progress.html" class="card" style="text-align:center;">
+            <div class="card-icon"><i class="fas fa-certificate"></i></div>
+            <div class="card-title">Certificates</div>
+          </a>
+        </div>
+        <div id="dashboard-section" class="content-section active">
+          <h2 class="section-title">Overview</h2>
+
+          <div class="dashboard-cards" id="dashboard-cards">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Enrolled Courses</div>
+                <div class="card-icon">
+                  <i class="fas fa-book"></i>
+                </div>
+              </div>
+              <div class="card-value">4</div>
+              <p>Continue your learning journey</p>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Completion Rate</div>
+                <div class="card-icon">
+                  <i class="fas fa-percentage"></i>
+                </div>
+              </div>
+              <div class="card-value">68%</div>
+              <p>Average across all courses</p>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Badges Earned</div>
+                <div class="card-icon">
+                  <i class="fas fa-trophy"></i>
+                </div>
+              </div>
+              <div class="card-value">7</div>
+              <p>Keep up the great work!</p>
+            </div>
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Weekly Learning</div>
+                <div class="card-icon"><i class="fas fa-clock"></i></div>
+              </div>
+              <div class="card-value">6h</div>
+              <p>Tracked in the last 7 days</p>
+            </div>
+          </div>
+          <div class="table-container" style="margin-top:1rem;">
+            <h3>Recent Activity</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Lesson</th>
+                  <th>Last Opened</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Advanced JavaScript</td>
+                  <td>Async Patterns</td>
+                  <td>Today 09:30</td>
+                </tr>
+                <tr>
+                  <td>UI/UX Design</td>
+                  <td>Design Systems</td>
+                  <td>Yesterday 17:20</td>
+                </tr>
+                <tr>
+                  <td>Machine Learning</td>
+                  <td>Linear Models</td>
+                  <td>Mon 14:10</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h3 style="margin:1.5rem 0;color:var(--primary)">Recommended Courses</h3>
+          <div class="courses-grid">
+            <div class="course-card">
+              <div class="course-image"><i class="fas fa-network-wired"></i></div>
+              <div class="course-content">
+                <h3>Introduction to ICT</h3>
+                <p>Foundational concepts and applications of ICT across sectors.</p>
+                <button class="btn enroll-btn" data-course="ict-introduction">View</button>
+              </div>
+            </div>
+            <div class="course-card">
+              <div class="course-image"><i class="fas fa-keyboard"></i></div>
+              <div class="course-content">
+                <h3>Computer Applications</h3>
+                <p>Essential office productivity tools and practical computing.</p>
+                <button class="btn enroll-btn" data-course="cs-computer-applications">View</button>
+              </div>
+            </div>
+            <div class="course-card">
+              <div class="course-image"><i class="fas fa-project-diagram"></i></div>
+              <div class="course-content">
+                <h3>Digital Logic Design</h3>
+                <p>Logic gates, combinational and sequential circuits.</p>
+                <button class="btn enroll-btn" data-course="ce-digital-logic-design">View</button>
+              </div>
+            </div>
+          </div>
+          <div class="table-container" style="margin-top:2rem;">
+            <h3>Upcoming Deadlines</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Course</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ICT Basics Quiz</td>
+                  <td>Introduction to ICT</td>
+                  <td>Fri, 18:00</td>
+                  <td><span style="color:var(--warning)">Pending</span></td>
+                  <td><button class="btn view-btn" data-course="ict-introduction">View</button></td>
+                </tr>
+                <tr>
+                  <td>Office Productivity Task</td>
+                  <td>Computer Applications</td>
+                  <td>Sun, 12:00</td>
+                  <td><span style="color:var(--success)">Scheduled</span></td>
+                  <td><button class="btn view-btn" data-course="cs-computer-applications">View</button></td>
+                </tr>
+                <tr>
+                  <td>Logic Gates Lab</td>
+                  <td>Digital Logic Design</td>
+                  <td>Mon, 09:00</td>
+                  <td><span style="color:var(--warning)">Pending</span></td>
+                  <td><button class="btn view-btn" data-course="ce-digital-logic-design">View</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            <div class="messages" style="margin-top:2rem;">
+              <h3>Messages</h3>
+              <p>You have 2 unread messages</p>
+              <a href="messages.html" class="btn btn-primary">Open Messages</a>
+            </div>
+
+            <!-- New Announcements Section -->
+            <div id="announcements-section" style="margin-top:2rem; background: #f8f9fa; padding: 1rem; border-radius: 12px; box-shadow: var(--box-shadow);">
+              <h3>Announcements</h3>
+              <ul id="announcements-list" style="list-style: disc; padding-left: 1.5rem; color: #333;">
+                <li>No announcements at this time.</li>
+              </ul>
+            </div>
+
+        <!-- New Submit Assignments Section -->
+            <div id="assignments-section" style="margin-top:2rem; background: #f8f9fa; padding: 1rem; border-radius: 12px; box-shadow: var(--box-shadow);">
+              <h3>Submit Assignments</h3>
+              <p>Please upload your completed assignments for review by your lecturers.</p>
+              <form id="assignmentUploadForm" enctype="multipart/form-data">
+                <label for="courseSelect">Select Course:</label>
+                <select id="courseSelect" required>
+                  <option value="" disabled selected>Select a course</option>
+                  <option value="Advanced JavaScript">Advanced JavaScript</option>
+                  <option value="UI/UX Design">UI/UX Design</option>
+                  <option value="Machine Learning">Machine Learning</option>
+                </select>
+                <br /><br />
+                <label for="assignmentFile">Upload Assignment File:</label>
+                <input type="file" id="assignmentFile" accept=".pdf,.doc,.docx,.zip" required />
+                <br /><br />
+                <button type="submit" class="btn btn-primary">Submit Assignment</button>
+              </form>
+              <div id="assignmentUploadStatus" style="margin-top:1rem; color: green;"></div>
+            </div>
+          </div>
+
+        <div id="courses-section" class="content-section">
+          <h2>My Courses</h2>
+          <div class="courses-list">
+            <div class="course-item">
+              <h3>Advanced JavaScript</h3>
+              <p>
+                Master modern JavaScript concepts including ES6+, async/await,
+                and more.
+              </p>
+              <button class="btn">Continue Learning</button>
+            </div>
+            <div class="course-item">
+              <h3>UI/UX Design</h3>
+              <p>
+                Create beautiful and functional user interfaces with modern
+                design principles.
+              </p>
+              <button class="btn">Continue Learning</button>
+            </div>
+            <div class="course-item">
+              <h3>Machine Learning</h3>
+              <p>
+                Build intelligent systems that learn from data using Python and
+                TensorFlow.
+              </p>
+              <button class="btn">Continue Learning</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="progress-section" class="content-section">
+          <h3>Course Progress</h3>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>Advanced JavaScript</span>
+              <span>75%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>UI/UX Design</span>
+              <span>45%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 45%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-header">
+              <span>Machine Learning</span>
+              <span>30%</span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 30%"></div>
+            </div>
+          </div>
+
+          <div class="certificates">
+            <h3>Earned Certificates</h3>
+            <div class="certificate-card">
+              <div class="certificate-icon">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <h4>HTML & CSS</h4>
+              <p>Completed May 2023</p>
+            </div>
+            <div class="certificate-card">
+              <div class="certificate-icon">
+                <i class="fas fa-certificate"></i>
+              </div>
+              <h4>JavaScript Basics</h4>
+              <p>Completed June 2023</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="messages-section" class="content-section">
+          <div class="messages">
+            <h3>Recent Messages</h3>
+            <div class="message-item">
+              <div class="message-avatar">L</div>
+              <div class="message-content">
+                <div class="message-sender">Dr. Lisa Chen</div>
+                <div class="message-text">
+                  Your assignment for Advanced JavaScript has been graded. Great
+                  work!
+                </div>
+                <div class="message-time">2 hours ago</div>
+              </div>
+            </div>
+            <div class="message-item">
+              <div class="message-avatar">M</div>
+              <div class="message-content">
+                <div class="message-sender">Prof. Michael Rodriguez</div>
+                <div class="message-text">
+                  Don't forget about the upcoming quiz on React components.
+                </div>
+                <div class="message-time">1 day ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="settings-section" class="content-section">
+          <h2>Settings</h2>
+          <form class="settings-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" value="Paul Mulilo" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" value="SmartLearn@gmail.com" />
+            </div>
+            <div class="form-group">
+              <label for="notifications">Email Notifications</label>
+              <input type="checkbox" id="notifications" checked />
+            </div>
+            <button type="submit" class="btn">Save Settings</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chatbot Panel -->
+    <div
+      class="chatbot-container"
+      id="chatbotContainer"
+      style="display: none"
+    >
+      <div class="chatbot-header">
+        <h3><i class="fas fa-robot"></i> SmartLearn AI Tutor</h3>
+        <button class="close-chat" id="closeChat">&times;</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+          Hello! I'm your SmartLearn Assistant. What topic would you like help
+          with?
+        </div>
+      </div>
+      <div class="chat-input">
+        <input
+          type="text"
+          id="userInput"
+          placeholder="Type your message..."
+        />
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+
+    <!-- Floating Chatbot Toggle -->
+    <div class="chatbot-toggle-btn" id="floatingChatBtn">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="student.html">Dashboard</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          &copy; 2025 SmartLearn. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+              if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon','fa-sun');
+              } else {
+                icon.classList.replace('fa-sun','fa-moon');
+              }
+            }
+          });
+        }
+        function toggleChatbot(){ const c = document.getElementById('chatbotContainer'); if(!c) return; c.style.display = c.style.display==='none'?'flex':'none'; }
+        const sBtn = document.getElementById('chatbotToggle');
+        const fBtn = document.getElementById('floatingChatBtn');
+        if (sBtn) sBtn.addEventListener('click', toggleChatbot);
+        if (fBtn) fBtn.addEventListener('click', toggleChatbot);
+        const sendBtn = document.getElementById('sendBtn');
+        const userInput = document.getElementById('userInput');
+        const chatBox = document.getElementById('chatMessages');
+        function addMessage(message, isUser){ if(!chatBox) return; const div = document.createElement('div'); div.className = 'message ' + (isUser?'user-message':'bot-message'); div.textContent = message; chatBox.appendChild(div); chatBox.scrollTop = chatBox.scrollHeight; }
+        function getBotResponse(msg){ const m = msg.toLowerCase(); const map = { hello:"Hi there!", progress:"Check your progress page.", materials:"New materials appear in the list.", default:"Ask about courses, progress, or messages." }; for(const k in map){ if(m.includes(k)) return map[k]; } return map.default; }
+        function handle(){ const val = userInput.value.trim(); if(!val) return; addMessage(val, true); userInput.value=''; setTimeout(()=> addMessage(getBotResponse(val), false), 500); }
+        if (sendBtn) sendBtn.addEventListener('click', handle);
+        if (userInput) userInput.addEventListener('keypress', (e)=>{ if(e.key==='Enter') handle(); });
+        function loadEnrollments(){ try{ const r = localStorage.getItem('enrollments'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+        function loadMaterials(){ try{ const r = localStorage.getItem('materials'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+        function loadAnnouncements(){ try{ const r = localStorage.getItem('studentAnnouncements'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+        function loadNotifications(){ try{ const r = localStorage.getItem('studentNotifications'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+        function renderAnnouncements(){ const list = loadAnnouncements(); const container = document.getElementById('announcements-list'); if(!container) return; container.innerHTML = list.length? list.map(a=>`${a.date} - ${a.message}`).map(t=>`<li>${t}</li>`).join('') : '<li>No announcements at this time.</li>'; }
+        function renderStudentMaterials(){ const listEl = document.getElementById('studentMaterialsList'); if(!listEl) return; const enr = loadEnrollments(); const keys = new Set(enr.map(e=>e.courseKey)); const mats = loadMaterials().filter(m=> keys.has(m.courseKey)); listEl.innerHTML = mats.length ? mats.map(m=>`<li>${m.title} · ${m.type.toUpperCase()} · ${m.courseKey}</li>`).join('') : '<li>No materials yet</li>'; }
+        function renderStudentNotifications(){ const listEl = document.getElementById('studentNotificationsList'); if(!listEl) return; const list = loadNotifications(); listEl.innerHTML = list.length ? list.map(n=>`<li>${n.type} · ${new Date(n.ts).toLocaleString()}</li>`).join('') : '<li>No notifications</li>'; }
+        const assignmentForm = document.getElementById('assignmentUploadForm');
+        const assignmentStatus = document.getElementById('assignmentUploadStatus');
+        function saveSubmission(sub){ try{ const r = localStorage.getItem('assignmentSubmissions'); const s = r?JSON.parse(r):[]; s.push(sub); localStorage.setItem('assignmentSubmissions', JSON.stringify(s)); return true; }catch(e){ return false } }
+        if (assignmentForm){ assignmentForm.addEventListener('submit', (e)=>{ e.preventDefault(); const courseSelect = document.getElementById('courseSelect'); const assignmentFile = document.getElementById('assignmentFile'); if(!courseSelect.value){ alert('Please select a course.'); return; } if(!assignmentFile.files.length){ alert('Please select a file.'); return; } const submission = { id: Date.now(), course: courseSelect.value, fileName: assignmentFile.files[0].name, submittedAt: new Date().toLocaleString(), student: (function(){ try{ return localStorage.getItem('studentDisplayName') || localStorage.getItem('studentName') || 'Student' }catch(e){ return 'Student' } })(), status:'submitted' }; const ok = saveSubmission(submission); if(ok){ assignmentStatus.textContent = `Successfully submitted "${submission.fileName}" for ${submission.course}.`; assignmentForm.reset(); } else { assignmentStatus.textContent = 'Failed to submit assignment. Please try again.'; assignmentStatus.style.color='red'; } }); }
+        const continueLearningBtn = document.getElementById('continueLearningBtn'); if (continueLearningBtn){ continueLearningBtn.addEventListener('click', ()=>{ window.location.href = 'course-content.html'; }); }
+        const topMessages = document.getElementById('topMessages'); if (topMessages){ topMessages.addEventListener('click', ()=>{ window.location.href = 'messages.html'; }); }
+        const logoutTop = document.getElementById('logoutTop'); if (logoutTop){ logoutTop.addEventListener('click', ()=>{ window.location.href = '../home.html'; }); }
+        function renderAll(){ renderAnnouncements(); renderStudentMaterials(); renderStudentNotifications(); }
+        document.addEventListener('DOMContentLoaded', renderAll);
+        window.addEventListener('storage', renderAll);
+      })();
+      </script>
+      <script>
+        (function(){
+          document.querySelectorAll('.courses-grid .enroll-btn').forEach(b => {
+            b.addEventListener('click', () => { window.location.href = 'courses.html'; });
+          });
+          document.querySelectorAll('.view-btn').forEach(b => {
+            b.addEventListener('click', () => { window.location.href = 'courses.html'; });
+          });
+        })();
+      </script>
+    </body>
+  </html>

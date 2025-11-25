@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat with Students | SmartLearn</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div></header>
+  <main class="main-content page-chat" style="padding:1rem">
+    <h2 class="section-title">Messages</h2>
+    <div class="chat-layout">
+      <div class="threads-panel">
+        <div id="threadList" class="thread-list"></div>
+      </div>
+      <div class="messages-panel">
+        <div class="chat-header"><div id="chatAvatar" class="avatar">L</div><div id="chatName">Chat</div></div>
+        <div id="messagesContainer" class="chat-messages"></div>
+        <div class="chat-input"><input type="text" id="messageInput" placeholder="Type a message" /><button id="messageSendBtn" class="send-btn">Send</button></div>
+      </div>
+    </div>
+  </main>
+  <script src="../scripts.js"></script>
+  </body>
+  </html>

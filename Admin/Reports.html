@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reports & Analytics | SmartLearn Admin</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="admin.html">Admin Dashboard</a></nav></header>
+  <main class="main-content page-admin-reports" style="padding:1rem">
+    <h2 class="section-title">Reports & Analytics</h2>
+    <div class="table-container">
+      <h3>Generate Reports</h3>
+      <div style="display:flex;gap:0.6rem;flex-wrap:wrap">
+        <button class="btn" id="repStudentPerf">Student Performance</button>
+        <button class="btn" id="repLecturerActivity">Lecturer Activity</button>
+        <button class="btn" id="repCourseCompletion">Course Completion</button>
+        <button class="btn" id="repAttendance">Attendance</button>
+        <button class="btn" id="repUploads">Upload Statistics</button>
+      </div>
+    </div>
+    <div class="table-container"><h3>Charts</h3><div id="reportsCharts">Charts will appear here</div></div>
+    <div class="table-container"><h3>Table</h3><table><thead><tr><th>Metric</th><th>Value</th></tr></thead><tbody id="reportsTable"></tbody></table></div>
+  </main>
+  <script>
+    function loadAdminUsers(){ try{ const r = localStorage.getItem('adminUsers'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function loadAdminCourses(){ try{ const r = localStorage.getItem('adminCourses'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function loadMaterials(){ try{ const r = localStorage.getItem('materials'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function initializeAdminReportsPage(){ const root = document.querySelector('.page-admin-reports'); if(!root) return; const charts = document.getElementById('reportsCharts'); const table = document.getElementById('reportsTable'); function build(){ const perf = Math.round(Math.random()*100); charts.textContent = `Performance index: ${perf}`; const rows = [{metric:'Students', value: (loadAdminUsers().filter(u=>u.role==='student')).length}, {metric:'Lecturers', value:(loadAdminUsers().filter(u=>u.role==='lecturer')).length}, {metric:'Courses', value: loadAdminCourses().length}, {metric:'Uploads', value: loadMaterials().length}]; table.innerHTML = rows.map(r => `<tr><td>${r.metric}</td><td>${r.value}</td></tr>`).join(''); } build(); document.querySelectorAll('#repStudentPerf,#repLecturerActivity,#repCourseCompletion,#repAttendance,#repUploads').forEach(b => { b.addEventListener('click', build); }); }
+    initializeAdminReportsPage();
+  </script>
+  </body>
+  </html>

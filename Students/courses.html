@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmartLearn - Courses</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <a href="../home.html" class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn📘</span>
+      </a>
+      <div class="nav-icons">
+        <div class="role-indicator">
+          <i class="fas fa-user-graduate"></i>
+          <span>Student</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Student Dashboard -->
+    <div class="dashboard">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>Student Dashboard</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="student.html" id="dashboard-link"
+              ><i class="fas fa-home"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="courses.html" id="courses" class="active"
+              ><i class="fas fa-book"></i> My Courses</a
+            >
+          </li>
+          <li>
+            <a href="progress.html" id="progress"
+              ><i class="fas fa-chart-line"></i> Progress</a
+            >
+          </li>
+          <li>
+            <a href="messages.html" id="messages"
+              ><i class="fas fa-comments"></i> Messages</a
+            >
+          </li>
+          <li>
+            <a href="settings.html" id="settings-link"
+              ><i class="fas fa-cog"></i> Settings</a
+            >
+          </li>
+          <li>
+            <button id="chatbotToggle" class="sidebar-btn"
+              ><i class="fas fa-robot"></i> Ask AI Tutor</button
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <!-- Courses Page -->
+        <section class="courses">
+      <h2 class="section-title">Explore Our Courses</h2>
+      <div class="filters">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">ICT</button>
+        <button class="filter-btn">Computer Studies</button>
+        <button class="filter-btn">Computer Engineering</button>
+      </div>
+      <div class="courses-grid">
+        <div class="course-card" data-course="ict-introduction">
+          <div class="course-image"><i class="fas fa-network-wired"></i></div>
+          <div class="course-content"><h3>Introduction to ICT</h3><p>Overview of ICT concepts and applications.</p><button class="btn enroll-btn" data-course="ict-introduction">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-hardware-software">
+          <div class="course-image"><i class="fas fa-computer"></i></div>
+          <div class="course-content"><h3>Computer Hardware & Software</h3><p>Components, OS, and software ecosystems.</p><button class="btn enroll-btn" data-course="ict-hardware-software">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-networking-fundamentals">
+          <div class="course-image"><i class="fas fa-wifi"></i></div>
+          <div class="course-content"><h3>Networking Fundamentals</h3><p>Basics of networks, protocols, and topologies.</p><button class="btn enroll-btn" data-course="ict-networking-fundamentals">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-operating-systems">
+          <div class="course-image"><i class="fas fa-server"></i></div>
+          <div class="course-content"><h3>Operating Systems</h3><p>Core OS concepts and administration.</p><button class="btn enroll-btn" data-course="ict-operating-systems">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-tools-applications">
+          <div class="course-image"><i class="fas fa-toolbox"></i></div>
+          <div class="course-content"><h3>ICT Tools & Applications</h3><p>Using ICT tools for productivity.</p><button class="btn enroll-btn" data-course="ict-tools-applications">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-information-management">
+          <div class="course-image"><i class="fas fa-folder-open"></i></div>
+          <div class="course-content"><h3>Information Management</h3><p>Organizing and managing information systems.</p><button class="btn enroll-btn" data-course="ict-information-management">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-security-fundamentals">
+          <div class="course-image"><i class="fas fa-shield-halved"></i></div>
+          <div class="course-content"><h3>ICT Security Fundamentals</h3><p>Foundations of cybersecurity in ICT.</p><button class="btn enroll-btn" data-course="ict-security-fundamentals">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-network-administration">
+          <div class="course-image"><i class="fas fa-network-wired"></i></div>
+          <div class="course-content"><h3>Network Administration</h3><p>Configuring and maintaining networks.</p><button class="btn enroll-btn" data-course="ict-network-administration">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-wireless-communication">
+          <div class="course-image"><i class="fas fa-wifi"></i></div>
+          <div class="course-content"><h3>Wireless Communication</h3><p>Wireless standards and technologies.</p><button class="btn enroll-btn" data-course="ict-wireless-communication">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-cloud-computing-basics">
+          <div class="course-image"><i class="fas fa-cloud"></i></div>
+          <div class="course-content"><h3>Cloud Computing Basics</h3><p>Intro to cloud services and models.</p><button class="btn enroll-btn" data-course="ict-cloud-computing-basics">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-network-security">
+          <div class="course-image"><i class="fas fa-user-shield"></i></div>
+          <div class="course-content"><h3>Network Security</h3><p>Securing network infrastructure.</p><button class="btn enroll-btn" data-course="ict-network-security">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-system-administration">
+          <div class="course-image"><i class="fas fa-server"></i></div>
+          <div class="course-content"><h3>System Administration</h3><p>Managing systems and services.</p><button class="btn enroll-btn" data-course="ict-system-administration">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-server-management">
+          <div class="course-image"><i class="fas fa-database"></i></div>
+          <div class="course-content"><h3>Server Management</h3><p>Deploying and managing servers.</p><button class="btn enroll-btn" data-course="ict-server-management">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-in-business">
+          <div class="course-image"><i class="fas fa-briefcase"></i></div>
+          <div class="course-content"><h3>ICT in Business</h3><p>Business applications of ICT.</p><button class="btn enroll-btn" data-course="ict-in-business">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-digital-literacy">
+          <div class="course-image"><i class="fas fa-book"></i></div>
+          <div class="course-content"><h3>Digital Literacy</h3><p>Essential digital skills and safety.</p><button class="btn enroll-btn" data-course="ict-digital-literacy">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-office-productivity">
+          <div class="course-image"><i class="fas fa-file-alt"></i></div>
+          <div class="course-content"><h3>Office Productivity Tools</h3><p>Word, spreadsheets, presentations.</p><button class="btn enroll-btn" data-course="ict-office-productivity">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-web-communication">
+          <div class="course-image"><i class="fas fa-globe"></i></div>
+          <div class="course-content"><h3>Web Communication</h3><p>Communicating effectively online.</p><button class="btn enroll-btn" data-course="ict-web-communication">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ict-project-management">
+          <div class="course-image"><i class="fas fa-project-diagram"></i></div>
+          <div class="course-content"><h3>ICT Project Management</h3><p>Planning and delivering ICT projects.</p><button class="btn enroll-btn" data-course="ict-project-management">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+
+        <div class="course-card" data-course="cs-introduction-to-computers">
+          <div class="course-image"><i class="fas fa-desktop"></i></div>
+          <div class="course-content"><h3>Introduction to Computers</h3><p>Computer basics and components.</p><button class="btn enroll-btn" data-course="cs-introduction-to-computers">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-computer-applications">
+          <div class="course-image"><i class="fas fa-keyboard"></i></div>
+          <div class="course-content"><h3>Computer Applications</h3><p>Essential applications and use-cases.</p><button class="btn enroll-btn" data-course="cs-computer-applications">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-internet-web-tech">
+          <div class="course-image"><i class="fas fa-globe"></i></div>
+          <div class="course-content"><h3>Internet & Web Technologies</h3><p>Web fundamentals and the internet.</p><button class="btn enroll-btn" data-course="cs-internet-web-tech">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-programming-basics">
+          <div class="course-image"><i class="fas fa-code"></i></div>
+          <div class="course-content"><h3>Programming Basics</h3><p>Introductory programming concepts.</p><button class="btn enroll-btn" data-course="cs-programming-basics">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-data-representation">
+          <div class="course-image"><i class="fas fa-database"></i></div>
+          <div class="course-content"><h3>Data Representation</h3><p>Binary, formats, and structures.</p><button class="btn enroll-btn" data-course="cs-data-representation">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+
+        <div class="course-card" data-course="cs-word-processing">
+          <div class="course-image"><i class="fas fa-file-word"></i></div>
+          <div class="course-content"><h3>Word Processing</h3><p>Document creation and formatting.</p><button class="btn enroll-btn" data-course="cs-word-processing">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-spreadsheets">
+          <div class="course-image"><i class="fas fa-file-excel"></i></div>
+          <div class="course-content"><h3>Spreadsheets</h3><p>Data analysis with spreadsheets.</p><button class="btn enroll-btn" data-course="cs-spreadsheets">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-database-applications">
+          <div class="course-image"><i class="fas fa-database"></i></div>
+          <div class="course-content"><h3>Database Applications</h3><p>Using databases effectively.</p><button class="btn enroll-btn" data-course="cs-database-applications">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-presentation-software">
+          <div class="course-image"><i class="fas fa-file-powerpoint"></i></div>
+          <div class="course-content"><h3>Presentation Software</h3><p>Creating compelling presentations.</p><button class="btn enroll-btn" data-course="cs-presentation-software">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-web-design-basics">
+          <div class="course-image"><i class="fas fa-laptop-code"></i></div>
+          <div class="course-content"><h3>Web Design Basics</h3><p>HTML, CSS, and UI principles.</p><button class="btn enroll-btn" data-course="cs-web-design-basics">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+
+        <div class="course-card" data-course="cs-computer-ethics">
+          <div class="course-image"><i class="fas fa-scale-balanced"></i></div>
+          <div class="course-content"><h3>Computer Ethics</h3><p>Ethical use of technology.</p><button class="btn enroll-btn" data-course="cs-computer-ethics">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-computer-systems-theory">
+          <div class="course-image"><i class="fas fa-cogs"></i></div>
+          <div class="course-content"><h3>Computer Systems Theory</h3><p>Theory of computing systems.</p><button class="btn enroll-btn" data-course="cs-computer-systems-theory">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-ict-and-society">
+          <div class="course-image"><i class="fas fa-people-group"></i></div>
+          <div class="course-content"><h3>ICT & Society</h3><p>Impact of ICT on society.</p><button class="btn enroll-btn" data-course="cs-ict-and-society">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-cyber-safety">
+          <div class="course-image"><i class="fas fa-shield"></i></div>
+          <div class="course-content"><h3>Cyber Safety</h3><p>Staying safe online.</p><button class="btn enroll-btn" data-course="cs-cyber-safety">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="cs-emerging-technologies">
+          <div class="course-image"><i class="fas fa-microchip"></i></div>
+          <div class="course-content"><h3>Emerging Technologies</h3><p>Trends and future tech.</p><button class="btn enroll-btn" data-course="cs-emerging-technologies">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+
+        <div class="course-card" data-course="ce-programming">
+          <div class="course-image"><i class="fas fa-code"></i></div>
+          <div class="course-content"><h3>Computer Programming (C, C++, Python)</h3><p>Programming foundations across languages.</p><button class="btn enroll-btn" data-course="ce-programming">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-digital-logic-design">
+          <div class="course-image"><i class="fas fa-project-diagram"></i></div>
+          <div class="course-content"><h3>Digital Logic Design</h3><p>Logic gates, combinational and sequential circuits.</p><button class="btn enroll-btn" data-course="ce-digital-logic-design">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-computer-architecture">
+          <div class="course-image"><i class="fas fa-microchip"></i></div>
+          <div class="course-content"><h3>Computer Architecture</h3><p>CPU design, memory, I/O.</p><button class="btn enroll-btn" data-course="ce-computer-architecture">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-microprocessors-microcontrollers">
+          <div class="course-image"><i class="fas fa-microchip"></i></div>
+          <div class="course-content"><h3>Microprocessors & Microcontrollers</h3><p>Embedded computing cores.</p><button class="btn enroll-btn" data-course="ce-microprocessors-microcontrollers">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-data-structures-algorithms">
+          <div class="course-image"><i class="fas fa-code"></i></div>
+          <div class="course-content"><h3>Data Structures & Algorithms</h3><p>Core CS algorithms and structures.</p><button class="btn enroll-btn" data-course="ce-data-structures-algorithms">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-operating-systems">
+          <div class="course-image"><i class="fas fa-server"></i></div>
+          <div class="course-content"><h3>Operating Systems</h3><p>Processes, memory, file systems.</p><button class="btn enroll-btn" data-course="ce-operating-systems">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-embedded-systems">
+          <div class="course-image"><i class="fas fa-microchip"></i></div>
+          <div class="course-content"><h3>Embedded Systems</h3><p>Designing embedded applications.</p><button class="btn enroll-btn" data-course="ce-embedded-systems">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+
+        <div class="course-card" data-course="ce-electronics-i-ii">
+          <div class="course-image"><i class="fas fa-bolt"></i></div>
+          <div class="course-content"><h3>Electronics I & II</h3><p>Analog and digital electronics.</p><button class="btn enroll-btn" data-course="ce-electronics-i-ii">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-circuit-theory">
+          <div class="course-image"><i class="fas fa-wave-square"></i></div>
+          <div class="course-content"><h3>Circuit Theory</h3><p>Network theorems and analysis.</p><button class="btn enroll-btn" data-course="ce-circuit-theory">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-vlsi-design">
+          <div class="course-image"><i class="fas fa-microchip"></i></div>
+          <div class="course-content"><h3>VLSI Design</h3><p>Very-large-scale integration concepts.</p><button class="btn enroll-btn" data-course="ce-vlsi-design">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-signals-systems">
+          <div class="course-image"><i class="fas fa-wave-square"></i></div>
+          <div class="course-content"><h3>Signals & Systems</h3><p>Continuous and discrete systems.</p><button class="btn enroll-btn" data-course="ce-signals-systems">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-control-systems">
+          <div class="course-image"><i class="fas fa-sliders"></i></div>
+          <div class="course-content"><h3>Control Systems</h3><p>Feedback and system control.</p><button class="btn enroll-btn" data-course="ce-control-systems">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-fpga-programming">
+          <div class="course-image"><i class="fas fa-microchip"></i></div>
+          <div class="course-content"><h3>FPGA Programming</h3><p>Hardware description languages and FPGA.</p><button class="btn enroll-btn" data-course="ce-fpga-programming">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+
+        <div class="course-card" data-course="ce-computer-networks">
+          <div class="course-image"><i class="fas fa-network-wired"></i></div>
+          <div class="course-content"><h3>Computer Networks</h3><p>Network layers and protocols.</p><button class="btn enroll-btn" data-course="ce-computer-networks">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-network-engineering">
+          <div class="course-image"><i class="fas fa-network-wired"></i></div>
+          <div class="course-content"><h3>Network Engineering</h3><p>Designing and deploying networks.</p><button class="btn enroll-btn" data-course="ce-network-engineering">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-distributed-systems">
+          <div class="course-image"><i class="fas fa-server"></i></div>
+          <div class="course-content"><h3>Distributed Systems</h3><p>Scalable distributed architectures.</p><button class="btn enroll-btn" data-course="ce-distributed-systems">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-iot-systems">
+          <div class="course-image"><i class="fas fa-sitemap"></i></div>
+          <div class="course-content"><h3>IoT Systems</h3><p>Internet of Things design and integration.</p><button class="btn enroll-btn" data-course="ce-iot-systems">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+
+        <div class="course-card" data-course="ce-machine-learning">
+          <div class="course-image"><i class="fas fa-brain"></i></div>
+          <div class="course-content"><h3>Machine Learning</h3><p>Models, training, and evaluation.</p><button class="btn enroll-btn" data-course="ce-machine-learning">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-high-performance-computing">
+          <div class="course-image"><i class="fas fa-rocket"></i></div>
+          <div class="course-content"><h3>High-Performance Computing</h3><p>Parallel and accelerated computing.</p><button class="btn enroll-btn" data-course="ce-high-performance-computing">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-robotics">
+          <div class="course-image"><i class="fas fa-robot"></i></div>
+          <div class="course-content"><h3>Robotics</h3><p>Robot kinematics, control, and applications.</p><button class="btn enroll-btn" data-course="ce-robotics">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-cybersecurity-engineering">
+          <div class="course-image"><i class="fas fa-shield-halved"></i></div>
+          <div class="course-content"><h3>Cybersecurity Engineering</h3><p>Engineering secure systems.</p><button class="btn enroll-btn" data-course="ce-cybersecurity-engineering">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-cloud-edge-computing">
+          <div class="course-image"><i class="fas fa-cloud"></i></div>
+          <div class="course-content"><h3>Cloud & Edge Computing</h3><p>Architectures for cloud and edge.</p><button class="btn enroll-btn" data-course="ce-cloud-edge-computing">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+        <div class="course-card" data-course="ce-systems-design-simulation">
+          <div class="course-image"><i class="fas fa-cubes"></i></div>
+          <div class="course-content"><h3>Systems Design & Simulation</h3><p>Modeling and simulating systems.</p><button class="btn enroll-btn" data-course="ce-systems-design-simulation">Enroll</button><div class="ai-recommendation">Recommended for your interests!</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Chatbot Toggle -->
+    <div class="chatbot-toggle-btn" id="floatingChatBtn">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+      <div class="chatbot-header">
+        <h3><i class="fas fa-robot"></i> SmartLearn AI Tutor</h3>
+        <button class="close-chat" id="closeChat">&times;</button>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot-message">
+          Hello! I'm your SmartLearn Assistant. What topic would you like help
+          with?
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your message..." />
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="student.html">Dashboard</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          &copy; 2025 SmartLearn. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+              if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon','fa-sun');
+              } else {
+                icon.classList.replace('fa-sun','fa-moon');
+              }
+            }
+          });
+        }
+        function toggleChatbot(){ const c = document.getElementById('chatbotContainer'); if(!c) return; c.style.display = c.style.display==='none'?'flex':'none'; }
+        const sBtn = document.getElementById('chatbotToggle');
+        const fBtn = document.getElementById('floatingChatBtn');
+        if (sBtn) sBtn.addEventListener('click', toggleChatbot);
+        if (fBtn) fBtn.addEventListener('click', toggleChatbot);
+        const sendBtn = document.getElementById('sendBtn');
+        const userInput = document.getElementById('userInput');
+        const chatBox = document.getElementById('chatMessages');
+        function addMessage(message, isUser){ if(!chatBox) return; const div = document.createElement('div'); div.className = 'message ' + (isUser?'user-message':'bot-message'); div.textContent = message; chatBox.appendChild(div); chatBox.scrollTop = chatBox.scrollHeight; }
+        function getBotResponse(msg){ const m = msg.toLowerCase(); const map = { hello:"Hi there!", enroll:"Click Enroll on any course card.", default:"Ask about courses or enrollment." }; for(const k in map){ if(m.includes(k)) return map[k]; } return map.default; }
+        function handle(){ const val = userInput.value.trim(); if(!val) return; addMessage(val, true); userInput.value=''; setTimeout(()=> addMessage(getBotResponse(val), false), 500); }
+        if (sendBtn) sendBtn.addEventListener('click', handle);
+        if (userInput) userInput.addEventListener('keypress', (e)=>{ if(e.key==='Enter') handle(); });
+        function enroll(courseKey, title){ try{ const name = localStorage.getItem('studentDisplayName') || localStorage.getItem('studentName') || 'Student'; const enr = JSON.parse(localStorage.getItem('enrollments')||'[]'); enr.push({ id: Date.now(), student: name, courseKey }); localStorage.setItem('enrollments', JSON.stringify(enr)); localStorage.setItem('currentCourseKey', courseKey); localStorage.setItem('lastCourseUrl', 'course-content.html'); localStorage.setItem('lastCourseTitle', title); }catch(e){} window.location.href = 'course-content.html'; }
+        document.querySelectorAll('.course-card').forEach(card => {
+          const btn = card.querySelector('.enroll-btn');
+          if (!btn) return;
+          btn.addEventListener('click', () => {
+            const courseKey = btn.getAttribute('data-course');
+            const title = card.querySelector('h3')?.textContent || courseKey;
+            enroll(courseKey, title);
+          });
+        });
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.courses-grid .course-card');
+        function applyFilter(cat){
+          cards.forEach(card => {
+            const key = (card.getAttribute('data-course')||'').split('-')[0];
+            if (cat==='all' || key===cat) { card.style.display='block'; } else { card.style.display='none'; }
+          });
+        }
+        filterBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const text = btn.textContent.trim().toLowerCase();
+            const cat = text==='ict' ? 'ict' : (text==='computer studies' ? 'cs' : (text==='computer engineering' ? 'ce' : 'all'));
+            applyFilter(cat);
+          });
+        });
+        applyFilter('all');
+        const recs = document.querySelectorAll('.ai-recommendation');
+        const hasEnrollment = !!localStorage.getItem('currentCourseKey');
+        if (hasEnrollment) {
+          recs.forEach(el => { el.style.display='none'; });
+        } else {
+          recs.forEach(el => { el.style.display='block'; setTimeout(()=>{ el.style.display='none'; }, 2000); });
+        }
+      })();
+    </script>
+  </body>
+</html>

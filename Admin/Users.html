@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Management | SmartLearn Admin</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="admin.html">Admin Dashboard</a></nav></header>
+  <main class="main-content page-admin-users" style="padding:1rem">
+    <h2 class="section-title">User Management</h2>
+    <div class="table-container">
+      <h3>Add New User</h3>
+      <form id="adminAddUserForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end">
+        <div><label>Name</label><input type="text" id="userName" /></div>
+        <div><label>Email</label><input type="email" id="userEmail" /></div>
+        <div><label>Role</label><select id="userRole"><option value="student">Student</option><option value="lecturer">Lecturer</option><option value="admin">Admin</option></select></div>
+        <button class="btn btn-primary" type="submit">Add User</button>
+      </form>
+    </div>
+    <div class="table-container">
+      <h3>Users</h3>
+      <div style="display:flex;gap:1rem;margin-bottom:0.6rem"><input id="userSearch" type="text" placeholder="Search users" /><select id="userFilter"><option value="all">All</option><option value="student">Students</option><option value="lecturer">Lecturers</option><option value="admin">Admins</option></select></div>
+      <table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead><tbody id="adminUsersTable"></tbody></table>
+    </div>
+  </main>
+  <script>
+    function loadAdminUsers(){ try{ const r = localStorage.getItem('adminUsers'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function saveAdminUsers(list){ try{ localStorage.setItem('adminUsers', JSON.stringify(list)) }catch(e){} }
+    function pushAdminLog(text){ try{ const r = localStorage.getItem('adminLogs'); const list = r?JSON.parse(r):[]; list.unshift({ ts:new Date().toLocaleString(), text }); localStorage.setItem('adminLogs', JSON.stringify(list)); }catch(e){} }
+    function initializeAdminUsersPage(){ const root = document.querySelector('.page-admin-users'); if(!root) return; const form = document.getElementById('adminAddUserForm'); const table = document.getElementById('adminUsersTable'); const search = document.getElementById('userSearch'); const filter = document.getElementById('userFilter'); function render(){ let list = loadAdminUsers(); const q = (search && search.value||'').toLowerCase(); const f = (filter && filter.value)||'all'; if(q) list = list.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)); if(f!=='all') list = list.filter(u => u.role===f); table.innerHTML = list.map(u => `<tr><td>${u.name}</td><td>${u.email}</td><td>${u.role}</td><td>Active</td><td><button class="btn" data-edit="${u.id}">Edit</button><button class="btn" data-del="${u.id}">Remove</button></td></tr>`).join(''); table.querySelectorAll('button[data-del]').forEach(b => { b.addEventListener('click', () => { const id = parseInt(b.getAttribute('data-del')); const list = loadAdminUsers().filter(x=>x.id!==id); saveAdminUsers(list); pushAdminLog('Removed user '+id); render(); }); }); } if(form){ form.addEventListener('submit', (ev) => { ev.preventDefault(); const u = { id: Date.now(), name: document.getElementById('userName').value, email: document.getElementById('userEmail').value, role: document.getElementById('userRole').value }; const list = loadAdminUsers(); list.push(u); saveAdminUsers(list); pushAdminLog('Added user '+u.name); render(); }); } if(search) search.addEventListener('input', render); if(filter) filter.addEventListener('change', render); render(); }
+    initializeAdminUsersPage();
+  </script>
+  </body>
+  </html>

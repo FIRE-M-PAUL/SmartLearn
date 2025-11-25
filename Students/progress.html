@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLearn - Student Progress</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .progress-page { padding: 3rem 5%; max-width: 1200px; margin: 0 auto; }
+      .chart-card { background: white; border-radius: var(--border-radius); padding: 2rem; box-shadow: var(--box-shadow); }
+      .dark-mode .chart-card { background-color: var(--light-gray); }
+      .course-progress-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+      .course-progress-item { background: white; border-radius: var(--border-radius); padding: 1.5rem; box-shadow: var(--box-shadow); }
+      .dark-mode .course-progress-item { background-color: var(--light-gray); }
+      .course-progress-item h4 { margin-bottom: 0.5rem; color: var(--dark); }
+      .course-meta { display: flex; justify-content: space-between; margin-top: 0.5rem; color: var(--gray); }
+      .badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+      .badge { background: white; border-radius: var(--border-radius); padding: 1rem; box-shadow: var(--box-shadow); display: flex; align-items: center; gap: 0.8rem; }
+      .dark-mode .badge { background-color: var(--light-gray); }
+      .badge i { color: var(--primary); font-size: 1.4rem; }
+      @media (max-width: 768px) { .progress-page { padding: 2rem 5%; } }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <a href="../home.html" class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn📘</span>
+      </a>
+      <div class="nav-icons">
+        <div class="role-indicator">
+          <i class="fas fa-user-graduate"></i>
+          <span>Student</span>
+        </div>
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Student Dashboard -->
+    <div class="dashboard">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h3>Student Dashboard</h3>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="student.html" id="dashboard-link"
+              ><i class="fas fa-home"></i> Dashboard</a
+            >
+          </li>
+          <li>
+            <a href="courses.html" id="courses"
+              ><i class="fas fa-book"></i> My Courses</a
+            >
+          </li>
+          <li>
+            <a href="progress.html" id="progress" class="active"
+              ><i class="fas fa-chart-line"></i> Progress</a
+            >
+          </li>
+          <li>
+            <a href="messages.html" id="messages"
+              ><i class="fas fa-comments"></i> Messages</a
+            >
+          </li>
+          <li>
+            <a href="settings.html" id="settings-link"
+              ><i class="fas fa-cog"></i> Settings</a
+            >
+          </li>
+          <li>
+            <button id="chatbotToggle" class="sidebar-btn"
+              ><i class="fas fa-robot"></i> Ask AI Tutor</button
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <section class="progress-page">
+      <h2 class="section-title">Learning Progress</h2>
+
+      <div class="dashboard-cards">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Total Courses</div>
+            <div class="card-icon"><i class="fas fa-book"></i></div>
+          </div>
+          <div class="card-value">6</div>
+          <p>Enrolled across categories</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Average Progress</div>
+            <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          </div>
+          <div class="card-value">72%</div>
+          <p>Weighted across active courses</p>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Hours Learned</div>
+            <div class="card-icon"><i class="fas fa-clock"></i></div>
+          </div>
+          <div class="card-value">128</div>
+          <p>Total tracked study time</p>
+        </div>
+      </div>
+
+      <div class="chart-card" style="margin-bottom:2rem">
+        <h3 style="margin-bottom:1rem;color:var(--primary)">Progress Over Time</h3>
+        <canvas id="progressChart" width="800" height="260" style="width:100%"></canvas>
+      </div>
+
+      <h3 style="margin-bottom:1rem;color:var(--primary)">Course Progress</h3>
+      <div class="course-progress-list">
+        <div class="course-progress-item">
+          <h4>Advanced JavaScript</h4>
+          <div class="progress-bar"><div class="progress-fill" style="width: 80%"></div></div>
+          <div class="course-meta"><span>80% complete</span><span>16/20 lessons</span></div>
+        </div>
+        <div class="course-progress-item">
+          <h4>UI/UX Design</h4>
+          <div class="progress-bar"><div class="progress-fill" style="width: 56%"></div></div>
+          <div class="course-meta"><span>56% complete</span><span>11/20 lessons</span></div>
+        </div>
+        <div class="course-progress-item">
+          <h4>Machine Learning</h4>
+          <div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div>
+          <div class="course-meta"><span>40% complete</span><span>8/20 lessons</span></div>
+        </div>
+        <div class="course-progress-item">
+          <h4>Python Fundamentals</h4>
+          <div class="progress-bar"><div class="progress-fill" style="width: 70%"></div></div>
+          <div class="course-meta"><span>70% complete</span><span>14/20 lessons</span></div>
+        </div>
+        <div class="course-progress-item">
+          <h4>Project Management</h4>
+          <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
+          <div class="course-meta"><span>65% complete</span><span>13/20 lessons</span></div>
+        </div>
+        <div class="course-progress-item">
+          <h4>Data Visualization</h4>
+          <div class="progress-bar"><div class="progress-fill" style="width: 50%"></div></div>
+          <div class="course-meta"><span>50% complete</span><span>10/20 lessons</span></div>
+        </div>
+      </div>
+
+      <h3 style="margin:2rem 0 1rem;color:var(--primary)">Achievements</h3>
+      <div class="badges">
+        <div class="badge"><i class="fas fa-trophy"></i><div><div style="font-weight:700">JavaScript Ninja</div><div style="color:var(--gray)">Completed advanced JS track</div></div></div>
+        <div class="badge"><i class="fas fa-medal"></i><div><div style="font-weight:700">Design Pro</div><div style="color:var(--gray)">UI patterns mastery</div></div></div>
+        <div class="badge"><i class="fas fa-certificate"></i><div><div style="font-weight:700">ML Explorer</div><div style="color:var(--gray)">Model basics completed</div></div></div>
+        <div class="badge"><i class="fas fa-star"></i><div><div style="font-weight:700">Consistency Star</div><div style="color:var(--gray)">7 days streak</div></div></div>
+      </div>
+    </section>
+
+    <div class="chatbot-toggle-btn" id="floatingChatBtn"><i class="fas fa-comment"></i></div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="../home.html">Home</a>
+          <a href="../courses.html">Courses</a>
+          <a href="student.html">Students</a>
+          <a href="../chatbot.html">Chatbot</a>
+          <a href="../about.html">About</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+        <div class="copyright">&copy; 2025 SmartLearn. All rights reserved.</div>
+      </div>
+    </footer>
+
+    
+    <script>
+      const canvas = document.getElementById('progressChart');
+      const ctx = canvas.getContext('2d');
+      const labels = ['Jan','Feb','Mar','Apr','May','Jun','Jul'];
+      const data = [40,55,60,68,72,78,82];
+      const w = canvas.width, h = canvas.height;
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle = '#6c757d';
+      ctx.font = '12px Segoe UI';
+      ctx.textAlign = 'center';
+      const padding = 40, chartW = w - padding*2, chartH = h - padding*2;
+      ctx.strokeStyle = '#e9ecef';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(padding, h - padding);
+      ctx.lineTo(padding + chartW, h - padding);
+      ctx.moveTo(padding, h - padding);
+      ctx.lineTo(padding, h - padding - chartH);
+      ctx.stroke();
+      const barW = chartW / labels.length * 0.6;
+      const gap = chartW / labels.length * 0.4;
+      for (let i = 0; i < labels.length; i++) {
+        const x = padding + i * (barW + gap) + gap*0.5;
+        const val = data[i];
+        const bh = chartH * (val/100);
+        ctx.fillStyle = '#4361ee';
+        ctx.fillRect(x, h - padding - bh, barW, bh);
+        const grad = ctx.createLinearGradient(0,0,0,h);
+        grad.addColorStop(0,'#4cc9f0');
+        grad.addColorStop(1,'#7209b7');
+        ctx.fillStyle = grad;
+        ctx.globalAlpha = 0.25;
+        ctx.fillRect(x, h - padding - bh, barW, bh);
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = '#6c757d';
+        ctx.fillText(labels[i], x + barW/2, h - padding + 16);
+        ctx.fillText(val + '%', x + barW/2, h - padding - bh - 6);
+      }
+      </script>
+      <script>
+        // Load actual progress from localStorage and update the progress bars dynamically
+        document.addEventListener('DOMContentLoaded', () => {
+          try {
+            const completionsList = JSON.parse(localStorage.getItem('completionsList') || '[]');
+            const progressMap = {};
+            completionsList.forEach(rec => {
+              if (!progressMap[rec.courseKey]) {
+                progressMap[rec.courseKey] = {
+                  completedLessons: rec.completedLessons || 20,
+                  totalLessons: 20,
+                  percentage: 100
+                };
+              }
+            });
+            
+            // Update the progress items on the page
+            document.querySelectorAll('.course-progress-item').forEach(item => {
+              const title = item.querySelector('h4').textContent.toLowerCase().replace(/\s/g, '');
+              if (progressMap[title]) {
+                const progress = progressMap[title];
+                const fill = item.querySelector('.progress-fill');
+                if (fill) {
+                  fill.style.width = `${progress.percentage}%`;
+                }
+                const meta = item.querySelector('.course-meta');
+                if (meta) {
+                  meta.innerHTML = `<span>${progress.percentage}% complete</span><span>${progress.completedLessons}/${progress.totalLessons} lessons</span>`;
+                }
+              }
+            });
+          } catch(e) {
+            console.error('Failed to load course progress:', e);
+          }
+        });
+      </script>
+      <script>
+        // Theme toggle
+        (function(){
+          const themeToggle = document.getElementById('themeToggle');
+          if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+              document.body.classList.toggle('dark-mode');
+              const icon = themeToggle.querySelector('i');
+              if (icon) {
+                if (document.body.classList.contains('dark-mode')) {
+                  icon.classList.replace('fa-moon', 'fa-sun');
+                } else {
+                  icon.classList.replace('fa-sun', 'fa-moon');
+                }
+              }
+            });
+          }
+        })();
+
+        // Chatbot overlay and interactions
+        (function(){
+          function mountChatbotOverlay(){
+            if (document.getElementById('chatbotContainer')) return;
+            const wrap = document.createElement('div');
+            wrap.className = 'chatbot-container';
+            wrap.id = 'chatbotContainer';
+            wrap.style.display = 'flex';
+            wrap.innerHTML = '<div class="chatbot-header"><h3><i class="fas fa-robot"></i> SmartLearn AI Tutor</h3><button class="close-chat" id="closeChat">&times;</button></div><div class="chat-messages" id="chatMessages"><div class="message bot-message">Hello! I\'m your SmartLearn Assistant. What topic would you like help with?</div></div><div class="chat-input"><input type="text" id="userInput" placeholder="Type your message..." /><button id="sendBtn">Send</button></div>';
+            document.body.appendChild(wrap);
+            const sendEl = document.getElementById('sendBtn');
+            const inputEl = document.getElementById('userInput');
+            const closeEl = document.getElementById('closeChat');
+            if (sendEl) sendEl.addEventListener('click', handleUserMessage);
+            if (inputEl) inputEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+            if (closeEl) closeEl.addEventListener('click', () => { const c = document.getElementById('chatbotContainer'); if (c) c.style.display = 'none'; });
+          }
+
+          function toggleChatbot(){
+            let container = document.getElementById('chatbotContainer');
+            if (!container) {
+              mountChatbotOverlay();
+              container = document.getElementById('chatbotContainer');
+            }
+            if (!container) return;
+            container.style.display = container.style.display === 'flex' ? 'none' : 'flex';
+          }
+
+          const responses = {
+            hello: "Hi there! How can I help you learn today?",
+            hi: "Hello! What would you like to learn about?",
+            math: "Let\'s dive into math! Here\'s a quick refresher on algebra: Variables represent unknown values, and equations show relationships between quantities.",
+            science: "Science is amazing! Do you want to learn about physics, chemistry, or biology?",
+            programming: "Programming is a valuable skill! Would you like to learn about web development, data science, or mobile apps?",
+            quiz: "Sure! Here\'s a mini quiz: What is the capital of France? A) London B) Berlin C) Paris D) Madrid",
+            feedback: "I\'d love to give you feedback! Please share what you\'re working on.",
+            progress: "I see you\'re making great progress! Keep up the good work.",
+            certificate: "Congratulations on completing your course! Your certificate is ready for download.",
+            enroll: "To enroll in a course, simply click the \"Enroll\" button on any course card.",
+            default: "I\'m still learning! Try asking about math, science, programming, or quizzes. You can also ask for feedback or check your progress."
+          };
+
+          function getBotResponse(msg){
+            const m = msg.toLowerCase();
+            for (const k in responses) { if (m.includes(k)) return responses[k]; }
+            return responses.default;
+          }
+
+          function addMessage(message, isUser){
+            const box = document.getElementById('chatMessages');
+            if (!box) return;
+            const div = document.createElement('div');
+            div.className = 'message ' + (isUser ? 'user-message' : 'bot-message');
+            div.textContent = message;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+          }
+
+          function handleUserMessage(){
+            const inputEl = document.getElementById('userInput');
+            if (!inputEl) return;
+            const message = inputEl.value.trim();
+            if (!message) return;
+            addMessage(message, true);
+            inputEl.value = '';
+            setTimeout(() => { addMessage(getBotResponse(message)); }, 500);
+          }
+
+          const sidebarBtn = document.getElementById('chatbotToggle');
+          const floatingBtn = document.getElementById('floatingChatBtn');
+          if (sidebarBtn) sidebarBtn.addEventListener('click', toggleChatbot);
+          if (floatingBtn) floatingBtn.addEventListener('click', toggleChatbot);
+        })();
+      </script>
+  </body>
+</html>

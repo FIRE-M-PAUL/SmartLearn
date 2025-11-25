@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | SmartLearn</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="lecturer.html">Dashboard</a></nav></header>
+  <main class="main-content page-settings" style="padding:1rem">
+    <h2 class="section-title">Lecturer Settings</h2>
+    <div class="table-container">
+      <h3>Personal Information</h3>
+      <form id="settingsPersonalForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+        <div><label>Profile Picture</label><input type="file" id="setProfilePic" accept="image/*" /></div>
+        <div><label>Full Name</label><input type="text" id="setFullName" /></div>
+        <div><label>Email</label><input type="email" id="setEmail" /></div>
+        <div><label>Phone</label><input type="text" id="setPhone" /></div>
+        <div><label>Department</label><input type="text" id="setDept" /></div>
+        <div><label>Office Hours</label><input type="text" id="setOffice" /></div>
+        <button class="btn btn-primary" type="submit">Save Changes</button>
+      </form>
+    </div>
+    <div class="table-container">
+      <h3>Account Security</h3>
+      <form id="settingsSecurityForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+        <div><label>Old Password</label><input type="password" id="secOld" /></div>
+        <div><label>New Password</label><input type="password" id="secNew" /></div>
+        <div><label>Confirm Password</label><input type="password" id="secConfirm" /></div>
+        <label><input type="checkbox" id="sec2fa" /> Enable Two-Factor Authentication</label>
+        <button class="btn btn-primary" type="submit">Update Security</button>
+      </form>
+      <div style="margin-top:0.5rem">
+        <h4>Login Activity</h4>
+        <ul id="loginActivityList"></ul>
+        <button class="btn" id="logoutAllBtn">Logout from all devices</button>
+      </div>
+    </div>
+    <div class="table-container">
+      <h3>Notification Preferences</h3>
+      <form id="settingsNotifyForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5rem">
+        <label><input type="checkbox" id="notifSubmissions" /> New student submissions</label>
+        <label><input type="checkbox" id="notifMessages" /> New messages</label>
+        <label><input type="checkbox" id="notifAnnouncements" /> New announcements</label>
+        <label><input type="checkbox" id="notifReminders" /> Assignment reminders</label>
+        <label><input type="checkbox" id="notifAlerts" /> System alerts</label>
+        <label><input type="checkbox" id="notifEmail" /> Email notifications</label>
+        <label><input type="checkbox" id="notifPopups" /> In-dashboard pop-up notifications</label>
+        <button class="btn btn-primary" type="submit">Save Preferences</button>
+      </form>
+    </div>
+    <div class="table-container">
+      <h3>Dashboard Customization</h3>
+      <form id="settingsDashboardForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5rem">
+        <div><label>Theme</label><select id="dashTheme"><option value="light">Light</option><option value="dark">Dark</option><option value="system">System Default</option></select></div>
+        <div><label>Sidebar Position</label><select id="dashSidebar"><option value="left">Left</option><option value="right">Right</option></select></div>
+        <label><input type="checkbox" id="dashQuickStats" /> Quick Stats</label>
+        <label><input type="checkbox" id="dashDeadlines" /> Upcoming Deadlines</label>
+        <label><input type="checkbox" id="dashMessages" /> Recent Messages</label>
+        <label><input type="checkbox" id="dashNotifications" /> Notifications Panel</label>
+        <button class="btn btn-primary" type="submit">Save Customization</button>
+      </form>
+    </div>
+    <div class="table-container">
+      <h3>Privacy Settings</h3>
+      <form id="settingsPrivacyForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5rem">
+        <div><label>Who can message me?</label><select id="privMessages"><option value="students">Students only</option><option value="admin">Admin only</option><option value="everyone">Everyone</option></select></div>
+        <label><input type="checkbox" id="privShowEmail" /> Allow students to see my email</label>
+        <label><input type="checkbox" id="privShowOffice" /> Allow students to view my office hours</label>
+        <button class="btn btn-primary" type="submit">Save Privacy Settings</button>
+      </form>
+    </div>
+    <div class="table-container">
+      <h3>AI Assistant Preferences</h3>
+      <form id="settingsAIForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.5rem">
+        <div><label>AI Tone</label><select id="aiTonePref"><option value="formal">Formal</option><option value="simple">Simple</option><option value="friendly">Friendly</option></select></div>
+        <div><label>AI Accuracy</label><select id="aiAccuracyPref"><option value="strict">Strict</option><option value="balanced">Balanced</option><option value="creative">Creative</option></select></div>
+        <label><input type="checkbox" id="aiAutoFeedback" /> Allow AI to auto-suggest feedback</label>
+        <button class="btn btn-primary" type="submit">Save AI Preferences</button>
+      </form>
+    </div>
+    <div class="table-container" style="border-color:#e74c3c">
+      <h3>Delete Account</h3>
+      <button class="btn" id="deleteAccountBtn">Delete Account Permanently</button>
+    </div>
+  </main>
+  <script src="../scripts.js"></script>
+  </body>
+  </html>

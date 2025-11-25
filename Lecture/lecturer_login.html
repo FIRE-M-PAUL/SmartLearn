@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a14;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            border: 2px solid rgba(0, 255, 255, 0.5);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 500%;
+            height: 250%;
+            background: linear-gradient(45deg, #0066ff, #00ccff, #0066ff);
+            z-index: -1;
+            animation: rotate 15s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(180deg);
+            }
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: all 10s ease-in-out;
+        }
+
+        .login-form {
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            z-index: 2;
+        }
+
+        .signup-form {
+            width: 50%;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            z-index: 1;
+            transform: translateX(100%);
+        }
+
+        .form-container.active .login-form {
+            transform: translateX(-100%);
+        }
+
+        .form-container.active .signup-form {
+            transform: translateX(0%);
+        }
+
+        .form-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid #00ccff;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-bottom: 2px solid #00ffcc;
+        }
+
+        .input-group label {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: #888;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus ~ label,
+        .input-group input:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: #00ccff;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 0 5px;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            color: #888;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #00ccff, #0099cc);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #0099cc, #0066ff);
+            transform: translateY(-2px);
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .toggle-link a {
+            color: #00ccff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .toggle-link a:hover {
+            color: #00ffcc;
+            text-decoration: underline;
+        }
+
+        .info-section {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(45deg, #00ccff, #0066ff);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: white;
+            z-index: 3;
+        }
+
+        .form-container.active + .info-section {
+            left: 0;
+            right: auto;
+        }
+
+        .info-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .info-text {
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .divider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #00ccff, transparent);
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .container {
+                height: auto;
+                min-height: 500px;
+            }
+
+            .form-container {
+                flex-direction: column;
+            }
+
+            .login-form, .signup-form, .info-section {
+                width: 100%;
+                height: auto;
+            }
+
+            .form-container.active .login-form {
+                transform: translateY(-100%);
+            }
+
+            .form-container.active .signup-form {
+                transform: translateY(0%);
+            }
+
+            .info-section {
+                position: static;
+                order: -1;
+                width: 100%;
+                height: auto;
+                padding: 30px;
+            }
+
+            .divider {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="login-form">
+                <h2 class="form-title">Lecturer Login</h2>
+                <div class="input-group">
+                    <input type="email" id="emailLogin" placeholder=" " required>
+                    <label for="emailLogin">Email</label>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="passwordLogin" placeholder=" " required>
+                    <label for="passwordLogin">Password</label>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button class="btn" id="loginBtn">Login as Lecturer</button>
+                <div class="toggle-link">
+                    <a href="#" id="toSignup">Go to Lecturer Registration</a>
+                </div>
+                <div class="toggle-link"><a href="#" id="forgotLecturer">Forgot Password</a></div>
+            </div>
+            
+            <div class="signup-form">
+                <h2 class="form-title">Lecturer Registration</h2>
+                <div class="input-group">
+                    <input type="text" id="regName" placeholder=" " required>
+                    <label for="regName">Full Name</label>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="regEmail" placeholder=" " required>
+                    <label for="regEmail">Email</label>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="regPassword" placeholder=" " required>
+                    <label for="regPassword">Password</label>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="regConfirm" placeholder=" " required>
+                    <label for="regConfirm">Confirm Password</label>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="input-group">
+                    <input type="text" id="regPhone" placeholder=" ">
+                    <label for="regPhone">Phone Number</label>
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="input-group">
+                    <select id="regDept">
+                      <option value="" disabled selected>Select Department</option>
+                      <option value="Computer Science">Computer Science</option>
+                      <option value="Design">Design</option>
+                      <option value="Business">Business</option>
+                      <option value="Physics">Physics</option>
+                    </select>
+                    <label for="regDept">Department</label>
+                </div>
+                <div class="input-group">
+                    <input type="file" id="regDocs" accept=".pdf,.jpg,.png,.doc,.docx">
+                    <label for="regDocs">Upload ID / Qualifications (optional)</label>
+                </div>
+                <button class="btn" id="signupBtn">Create Account</button>
+                <div class="toggle-link">Your account remains inactive until an Admin approves it.</div>
+                <div class="toggle-link">Already registered? <a href="#" id="toLogin">Login</a></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2 class="info-title">WELCOME BACK!</h2>
+            <h4 class="info-title">SMARTLEARN</h4>
+            <p>SmartLearn is an easy-to-use e-learning platform for students, lecturers, and admins to learn, teach, and manage online.</p>
+            <h4 id="typing-text">SMARTLEARN FOR A SMARTER TOMORROW</h4>
+        </div>
+
+        <div class="divider"></div>
+    </div>
+
+    <script>
+      const formContainer = document.querySelector('.form-container');
+      const toSignupLink = document.getElementById('toSignup');
+      const toLoginLink = document.getElementById('toLogin');
+      const loginBtn = document.getElementById('loginBtn');
+      const signupBtn = document.getElementById('signupBtn');
+      const forgotLecturer = document.getElementById('forgotLecturer');
+      function loadLecturers(){ try{ const r = localStorage.getItem('lecturerAuth'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+      function loadStudents(){ try{ const r = localStorage.getItem('studentAuth'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+      function loadAdminsAuth(){ try{ const r = localStorage.getItem('adminAuth'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+      function saveLecturers(list){ try{ localStorage.setItem('lecturerAuth', JSON.stringify(list)) }catch(e){} }
+      function loadAdminUsers(){ try{ const r = localStorage.getItem('adminUsers'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+      if(toSignupLink){ toSignupLink.addEventListener('click', function(e){ e.preventDefault(); window.location.href = 'lecturer_register.html'; }); }
+      if(toLoginLink){ toLoginLink.addEventListener('click', function(e){ e.preventDefault(); formContainer.classList.remove('active'); }); }
+      if(loginBtn){ loginBtn.addEventListener('click', function(){ const email = (document.getElementById('emailLogin').value||'').trim().toLowerCase(); const pw = (document.getElementById('passwordLogin').value||'').trim(); const list = loadLecturers(); const acc = list.find(a => a.email.toLowerCase()===email && a.password===pw); if(!acc){ const wrongStu = loadStudents().find(a => (a.email && a.email.toLowerCase()===email) && a.password===pw); const wrongAdm = loadAdminsAuth().find(a => a.email && a.email.toLowerCase()===email && a.password===pw); if(wrongStu || wrongAdm){ alert('You do not have permission to access this dashboard.'); return; } alert('Invalid credentials.'); return; } const approved = loadAdminUsers().some(u => u.email && u.email.toLowerCase()===email && u.role==='lecturer'); if(!approved){ alert('Your account is pending approval by an admin.'); return; } try{ localStorage.setItem('selectedRole','lecturer'); localStorage.setItem('lecturerName', acc.name||email); }catch(e){} window.location.href = 'lecturer.html'; }); }
+      if(signupBtn){ signupBtn.addEventListener('click', function(){ const name = (document.getElementById('regName').value||'').trim(); const email = (document.getElementById('regEmail').value||'').trim().toLowerCase(); const pw = (document.getElementById('regPassword').value||'').trim(); const cf = (document.getElementById('regConfirm').value||'').trim(); const phone = (document.getElementById('regPhone').value||'').trim(); const deptSel = document.getElementById('regDept'); const dept = (deptSel && (deptSel.value||'').trim()) || ''; const docsEl = document.getElementById('regDocs'); if(!name){ alert('Please enter your full name.'); return; } if(!email){ alert('Please enter your email.'); return; } if(!pw){ alert('Please enter a password.'); return; } if(!cf){ alert('Please confirm your password.'); return; } if(!dept){ alert('Please select Department.'); return; } if(pw!==cf){ alert('Passwords do not match.'); return; } const list = loadLecturers(); if(list.some(a => a.email.toLowerCase()===email)){ alert('An account with this email already exists.'); return; } const fileName = docsEl && docsEl.files && docsEl.files[0] ? docsEl.files[0].name : ''; const acc = { id: Date.now(), name, email, password: pw, phone, dept, status:'pending' }; list.push(acc); saveLecturers(list); try{ const pend = JSON.parse(localStorage.getItem('adminPendingApprovals')||'[]'); pend.push({ id: acc.id, name, email, role:'lecturer', docs:fileName }); localStorage.setItem('adminPendingApprovals', JSON.stringify(pend)); }catch(e){} alert('Registration submitted. Your account is pending approval by an admin.'); formContainer.classList.remove('active'); }); }
+      if(forgotLecturer){ forgotLecturer.addEventListener('click', function(e){ e.preventDefault(); alert('Please contact an admin to reset your password.'); }); }
+    </script>
+</body>
+</html>

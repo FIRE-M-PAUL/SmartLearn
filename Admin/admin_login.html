@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body{background:#0a0a14;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+    .card{width:100%;max-width:420px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.2);padding:1.5rem}
+    .dark-mode .card{background:#1f2937;color:#e5e7eb}
+    .card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+    .card-title{font-weight:700}
+    .form-group{margin-bottom:1rem}
+    .form-group label{display:block;font-weight:600;margin-bottom:0.5rem}
+    .form-group input{width:100%;padding:0.8rem;border:2px solid var(--light-gray);border-radius:8px}
+    .btn{width:100%;padding:0.8rem;border:none;border-radius:8px;background:var(--primary);color:#fff;font-weight:700}
+    .meta{display:flex;justify-content:space-between;align-items:center;margin-top:0.6rem}
+    .note{color:var(--danger);font-size:0.9rem;margin-top:0.6rem}
+    .link{color:var(--primary);text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header"><div class="card-title">Admin Login</div><div class="card-icon"><i class="fas fa-user-shield"></i></div></div>
+    <div class="form-group"><label>Admin Email</label><input type="email" id="adminEmail" placeholder="admin@example.com"></div>
+    <div class="form-group"><label>Password</label><input type="password" id="adminPassword" placeholder="••••••••"></div>
+    <button class="btn" id="adminLoginBtn">Login as Admin</button>
+    <div class="meta"><a href="#" id="forgotAdmin" class="link">Forgot Password</a><span></span></div>
+    <div class="note">Admin access only. Public registration is disabled.</div>
+  </div>
+  <script>
+    (function(){
+      const themeToggleEl = null;
+      function loadAdmins(){ try{ const r = localStorage.getItem('adminAuth'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+      function saveAdmins(list){ try{ localStorage.setItem('adminAuth', JSON.stringify(list)) }catch(e){} }
+      (function seed(){ const list = loadAdmins(); if(!list.length){ list.push({ email:'admin@smartlearn.local', password:'admin123' }); saveAdmins(list); } })();
+      const btn = document.getElementById('adminLoginBtn');
+      const emailEl = document.getElementById('adminEmail');
+      const passEl = document.getElementById('adminPassword');
+      const forgot = document.getElementById('forgotAdmin');
+      if(btn){ btn.addEventListener('click', ()=>{ const email = (emailEl.value||'').trim().toLowerCase(); const pw = (passEl.value||'').trim(); const list = loadAdmins(); const ok = list.some(a => a.email.toLowerCase()===email && a.password===pw); if(!ok){ alert('Invalid admin credentials.'); return; } try{ localStorage.setItem('selectedRole','admin'); localStorage.setItem('adminEmail', email); }catch(e){} window.location.href = 'admin.html'; }); }
+      if(forgot){ forgot.addEventListener('click', (e)=>{ e.preventDefault(); alert('Please contact another admin to reset your password.'); }); }
+    })();
+  </script>
+</body>
+</html>

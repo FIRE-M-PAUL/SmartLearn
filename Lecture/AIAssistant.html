@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Assistant | SmartLearn</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div></header>
+  <main class="main-content page-ai" style="padding:1rem">
+    <h2 class="section-title">AI Assistant</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:start">
+      <div><label>Course</label><select id="aiCourse"><option value="javascript">Advanced JavaScript</option><option value="design">UI/UX Design</option><option value="ml">Machine Learning</option></select></div>
+      <div><label>Tone</label><select id="aiTone"><option>Simple</option><option>Academic</option><option>Formal</option></select></div>
+      <div><label>Upload</label><input type="file" id="aiUpload" accept=".pdf,.doc,.docx,.ppt,.pptx" /></div>
+    </div>
+    <div style="margin-top:1rem"><textarea id="aiInput" rows="4" style="width:100%" placeholder="Ask AI"></textarea></div>
+    <div style="margin-top:0.5rem;display:flex;gap:0.5rem"><button class="btn btn-primary" id="aiAskBtn">Ask AI</button><button class="btn" id="aiSaveAssignment">Save as Assignment Draft</button><button class="btn" id="aiPostAnnouncement">Post to Students</button></div>
+    <div style="margin-top:1rem"><textarea id="aiOutput" rows="10" style="width:100%" placeholder="Output"></textarea></div>
+  </main>
+  <script src="../scripts.js"></script>
+  </body>
+  </html>

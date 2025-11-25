@@ -1,73 +1,67 @@
-# Welcome to your Lovable project
+# SmartLearn
 
-## Project info
+**Tagline:** Smart Learning for a Smarter Tomorrow
 
-**URL**: https://lovable.dev/projects/e1bd30ce-b0ff-438b-b376-32b50983870b
+---
 
-## How can I edit this code?
+## Project Description
 
-There are several ways of editing your application.
+SmartLearn is an AI-powered personalized learning platform designed to empower learners through intelligent and adaptive education. It caters to three main user roles—Students, Lecturers, and Admins—offering tailored experiences that enhance engagement and foster effective learning. The platform leverages AI to provide personalized content, instant feedback, intelligent tutoring, progress monitoring, and gamification to make learning both effective and enjoyable.
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e1bd30ce-b0ff-438b-b376-32b50983870b) and start prompting.
+## User Roles and Their Interfaces
 
-Changes made via Lovable will be committed automatically to this repo.
+- **Student:** Learners can register, browse courses, track progress, interact with course content, and receive AI-driven feedback and tutoring.
+- **Lecturer:** Educators can manage course materials, assignments, announcements, grading, and monitor student performance.
+- **Admin:** Administrators have access to a comprehensive dashboard for managing users, courses, content, system monitoring, approvals, reports, announcements, and settings.
 
-**Use your preferred IDE**
+Each role has dedicated interfaces optimized for respective user tasks, accessible via role-specific login pages.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Key Features
 
-Follow these steps:
+- **Personalized Learning:** AI tailors content delivery according to individual learning styles and pace.
+- **Instant Feedback:** Students receive immediate responses to questions and assignments.
+- **AI Tutor:** A 24/7 intelligent virtual tutor assists learners with various topics.
+- **Progress Tracking:** Detailed analytics help monitor learning journeys.
+- **Gamification:** Earn badges and rewards to motivate continuous progress.
+- **Emotion-Aware Adaptation:** AI detects learner frustration and adjusts difficulty levels accordingly.
+- **Chatbot Integration:** Users can interact with a SmartLearn AI Tutor chatbot for guidance and support.
+- **Theming:** Light and dark mode support for improved user experience.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Directory Structure Overview
 
-# Step 3: Install the necessary dependencies.
-npm i
+- `/Admin/` - Contains pages and components related to the Admin Panel such as user management, course management, content, approvals, monitoring, reports, announcements, and settings.
+- `/Lecture/` - Contains lecturer-specific pages for course management, grading, assignments, announcements, profile management, and settings.
+- `/Students/` - Contains student-specific pages for registration, login, course browsing, messaging, progress tracking, and settings.
+- Root files such as:
+  - `home.html` - Main landing page with role selection and feature overview.
+  - `chatbot.html` - Chatbot interface.
+  - `about.html` and `contact.html` - Informational and contact pages.
+  - `styles.css`, `scripts.js` - Main styling and scripting resources.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+---
 
-**Edit a file directly in GitHub**
+## How to Use
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+1. Access the platform via the landing page (`home.html`).
+2. Select your role: Student, Lecturer, or Admin.
+3. You will be redirected to the respective login page for authentication.
+4. Upon login, access the customized dashboard and features tailored to your role.
+5. Use available menus to manage courses, content, communicate, track progress, or administer the system based on your role.
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Footer and Contact Information
 
-## What technologies are used for this project?
+The platform includes footer links for About, Contact, Privacy Policy, and Terms of Service for easy navigation and information access.
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+© 2025 SmartLearn. All rights reserved.
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/e1bd30ce-b0ff-438b-b376-32b50983870b) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---

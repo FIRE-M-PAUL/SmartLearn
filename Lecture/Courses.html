@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses | SmartLearn</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo"><i class="fas fa-brain"></i> SmartLearn</div>
+    <nav class="header-nav"><a href="lecturer.html">Dashboard</a></nav>
+  </header>
+  <main class="main-content page-courses" style="padding:1rem">
+    <h2 class="section-title">My Courses</h2>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+      <input id="coursesSearch" type="text" placeholder="Search courses" />
+      <select id="coursesFilterDept"><option value="">Department</option><option>Computer Studies </option><option>Information Communication Technology</option><option>Computer Engineering</option></select>
+      <select id="coursesFilterSem"><option value="">Semester</option><option>Termly</option><option>Part Time</option></select>
+    </div>
+    <div id="coursesGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem"></div>
+  </main>
+  <footer class="footer"><div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div></footer>
+  <script src="../scripts.js"></script>
+  </body>
+  </html>

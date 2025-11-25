@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmartLearn - About</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <span>SmartLearn</span>
+      </div>
+      <div class="nav-links">
+        <a href="home.html" class="nav-link" data-page="home">Home</a>
+        <a href="courses.html" class="nav-link" data-page="courses">Courses</a>
+        <a href="chatbot.html" class="nav-link" data-page="chatbot">Chatbot</a>
+        <a href="about.html" class="nav-link active" data-page="about">About</a>
+        <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+      </div>
+      <div class="nav-icons">
+        <button class="theme-toggle" id="themeToggle">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="chatbot-toggle" id="chatbotToggle">
+          <i class="fas fa-comment-alt"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- About Page -->
+    <section class="about">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>How AI Enhances Learning</h2>
+          <p>
+            At SmartLearn, we leverage cutting-edge artificial intelligence to
+            revolutionize the educational experience. Our platform adapts to
+            each learner's unique needs, providing a truly personalized journey.
+          </p>
+          <p>
+            Our AI analyzes your learning patterns, strengths, and areas for
+            improvement to deliver content that maximizes your understanding and
+            retention.
+          </p>
+
+          <div class="features-list">
+            <div class="feature-item">
+              <i class="fas fa-sync-alt"></i>
+              <div>
+                <h3>Adaptive Learning</h3>
+                <p>Content adjusts in real-time based on your performance</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-comments"></i>
+              <div>
+                <h3>Instant Feedback</h3>
+                <p>Immediate responses to questions and assignments</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-heart"></i>
+              <div>
+                <h3>Emotion-Aware Engagement</h3>
+                <p>AI detects frustration and adjusts difficulty accordingly</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-chart-pie"></i>
+              <div>
+                <h3>Predictive Analytics</h3>
+                <p>Forecasts learning outcomes and suggests interventions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="about-image">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- Floating Chatbot Toggle -->
+    <div class="chatbot-toggle-btn" id="floatingChatBtn">
+      <i class="fas fa-comment"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="home.html">Home</a>
+          <a href="courses.html">Courses</a>
+          <a href="chatbot.html">Chatbot</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">
+          &copy; 2023 SmartLearn. All rights reserved.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function(){
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+              if (document.body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon','fa-sun');
+              } else {
+                icon.classList.replace('fa-sun','fa-moon');
+              }
+            }
+          });
+        }
+        function mountChatbotOverlay(){
+          if (document.getElementById('chatbotContainer')) return;
+          const wrap = document.createElement('div');
+          wrap.className = 'chatbot-container';
+          wrap.id = 'chatbotContainer';
+          wrap.style.display = 'flex';
+          wrap.innerHTML = '<div class="chatbot-header"><h3><i class="fas fa-robot"></i> SmartLearn AI Tutor</h3><button class="close-chat" id="closeChat">&times;</button></div><div class="chat-messages" id="chatMessages"><div class="message bot-message">Hello! I\'m your SmartLearn Assistant. What topic would you like help with?</div></div><div class="chat-input"><input type="text" id="userInput" placeholder="Type your message..." /><button id="sendBtn">Send</button></div>';
+          document.body.appendChild(wrap);
+          const sendEl = document.getElementById('sendBtn');
+          const inputEl = document.getElementById('userInput');
+          const closeEl = document.getElementById('closeChat');
+          function addMessage(message, isUser){ const box = document.getElementById('chatMessages'); if (!box) return; const div = document.createElement('div'); div.className = 'message ' + (isUser ? 'user-message' : 'bot-message'); div.textContent = message; box.appendChild(div); box.scrollTop = box.scrollHeight; }
+          function getBotResponse(msg){ const m = msg.toLowerCase(); const map = { hello:"Hi there!", ai:"Our AI adapts to you.", default:"Ask about SmartLearn or features." }; for(const k in map){ if(m.includes(k)) return map[k]; } return map.default; }
+          function handleUserMessage(){ const inputEl = document.getElementById('userInput'); if (!inputEl) return; const message = inputEl.value.trim(); if (!message) return; addMessage(message, true); inputEl.value=''; setTimeout(()=>{ addMessage(getBotResponse(message)); }, 500); }
+          if (sendEl) sendEl.addEventListener('click', handleUserMessage);
+          if (inputEl) inputEl.addEventListener('keypress', (e) => { if (e.key === 'Enter') handleUserMessage(); });
+          if (closeEl) closeEl.addEventListener('click', () => { const c = document.getElementById('chatbotContainer'); if (c) c.style.display = 'none'; });
+        }
+        function toggleChatbot(){ let c = document.getElementById('chatbotContainer'); if(!c){ mountChatbotOverlay(); c = document.getElementById('chatbotContainer'); } if(!c) return; c.style.display = c.style.display==='flex'?'none':'flex'; }
+        const sBtn = document.getElementById('chatbotToggle');
+        const fBtn = document.getElementById('floatingChatBtn');
+        if (sBtn) sBtn.addEventListener('click', toggleChatbot);
+        if (fBtn) fBtn.addEventListener('click', toggleChatbot);
+      })();
+    </script>
+  </body>
+</html>

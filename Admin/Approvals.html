@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Approvals | SmartLearn Admin</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="admin.html">Admin Dashboard</a></nav></header>
+  <main class="main-content page-admin-approvals" style="padding:1rem">
+    <h2 class="section-title">Approvals</h2>
+    <div class="table-container">
+      <h3>Pending Registrations</h3>
+      <table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Documents</th><th>Actions</th></tr></thead><tbody id="adminApprovalsTable"></tbody></table>
+    </div>
+    <div class="table-container">
+      <h3>Certificate Approvals</h3>
+      <table><thead><tr><th>Student</th><th>Course</th><th>Score</th><th>Lecturer Notes</th><th>Actions</th></tr></thead><tbody id="certApprovalsTable"></tbody></table>
+    </div>
+  </main>
+  <script>
+    function pushAdminLog(text){ try{ const r = localStorage.getItem('adminLogs'); const list = r?JSON.parse(r):[]; list.unshift({ ts:new Date().toLocaleString(), text }); localStorage.setItem('adminLogs', JSON.stringify(list)); }catch(e){} }
+    function initializeAdminApprovalsPage(){ const root = document.querySelector('.page-admin-approvals'); if(!root) return; const table = document.getElementById('adminApprovalsTable'); const pending = JSON.parse(localStorage.getItem('adminPendingApprovals')||'[]'); table.innerHTML = pending.map(p => `<tr><td>${p.name}</td><td>${p.email}</td><td>${p.role}</td><td>${p.docs||'-'}</td><td><button class="btn" data-ok="${p.id}">Approve</button><button class="btn" data-rej="${p.id}">Reject</button></td></tr>`).join(''); table.querySelectorAll('button[data-ok]').forEach(b => { b.addEventListener('click', ()=>{ const id = parseInt(b.getAttribute('data-ok')); const pend = (JSON.parse(localStorage.getItem('adminPendingApprovals')||'[]')).filter(x=>x.id!==id); localStorage.setItem('adminPendingApprovals', JSON.stringify(pend)); pushAdminLog('Approved account '+id); initializeAdminApprovalsPage(); }); }); table.querySelectorAll('button[data-rej]').forEach(b => { b.addEventListener('click', ()=>{ const id = parseInt(b.getAttribute('data-rej')); const pend = (JSON.parse(localStorage.getItem('adminPendingApprovals')||'[]')).filter(x=>x.id!==id); localStorage.setItem('adminPendingApprovals', JSON.stringify(pend)); pushAdminLog('Rejected account '+id); initializeAdminApprovalsPage(); }); }); const certTable = document.getElementById('certApprovalsTable'); fetch('http://127.0.0.1:5000/submissions').then(r=>r.json()).then(list => { const rows = list.filter(s => s.lecturer_approved && !s.admin_approved).map(s => `<tr><td>${s.student_id||'-'}</td><td>${s.course_key}</td><td>${s.auto_score_percent||''}</td><td>${s.lecturer_notes||''}</td><td><button class="btn" data-cert-ok="${s.id}">Approve</button><button class="btn" data-cert-rej="${s.id}">Decline</button></td></tr>`).join(''); certTable.innerHTML = rows || '<tr><td colspan="5">No pending certificates</td></tr>'; certTable.querySelectorAll('button[data-cert-ok]').forEach(b => { b.addEventListener('click', () => { const id = parseInt(b.getAttribute('data-cert-ok')); fetch('http://127.0.0.1:5000/submissions/'+id+'/admin-review', { method:'PUT', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ approved: true }) }).then(()=>{ pushAdminLog('Approved certificate '+id); initializeAdminApprovalsPage(); }); }); }); certTable.querySelectorAll('button[data-cert-rej]').forEach(b => { b.addEventListener('click', () => { const id = parseInt(b.getAttribute('data-cert-rej')); fetch('http://127.0.0.1:5000/submissions/'+id+'/admin-review', { method:'PUT', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ approved: false }) }).then(()=>{ pushAdminLog('Declined certificate '+id); initializeAdminApprovalsPage(); }); }); }); }).catch(()=>{ certTable.innerHTML = '<tr><td colspan="5">Unable to load</td></tr>'; }); }
+    initializeAdminApprovalsPage();
+  </script>
+  </body>
+  </html>

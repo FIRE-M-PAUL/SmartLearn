@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Monitoring | SmartLearn Admin</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="admin.html">Admin Dashboard</a></nav></header>
+  <main class="main-content page-admin-monitoring" style="padding:1rem">
+    <h2 class="section-title">System Monitoring</h2>
+    <div class="table-container"><h3>Active Sessions</h3><ul id="monitorSessions"></ul></div>
+    <div class="table-container"><h3>Recent Uploads</h3><ul id="monitorUploads"></ul></div>
+    <div class="table-container"><h3>Login Attempts</h3><ul id="monitorLogins"></ul></div>
+    <div class="table-container"><h3>Storage Usage</h3><div id="monitorStorage">-</div></div>
+    <div class="table-container"><h3>Server Health</h3><div id="monitorHealth">OK</div></div>
+    <div class="table-container"><h3>Error Logs</h3><ul id="monitorErrors"></ul></div>
+  </main>
+  <script>
+    function loadAdminUsers(){ try{ const r = localStorage.getItem('adminUsers'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function loadMaterials(){ try{ const r = localStorage.getItem('materials'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function initializeAdminMonitoringPage(){ const root = document.querySelector('.page-admin-monitoring'); if(!root) return; const sess = document.getElementById('monitorSessions'); const up = document.getElementById('monitorUploads'); const logins = document.getElementById('monitorLogins'); const stor = document.getElementById('monitorStorage'); const health = document.getElementById('monitorHealth'); const errs = document.getElementById('monitorErrors'); const users = loadAdminUsers(); if(sess) sess.innerHTML = users.slice(0,5).map(u => `<li>${u.name} (${u.role})</li>`).join(''); const mats = loadMaterials(); if(up) up.innerHTML = mats.slice(-5).map(m => `<li>${m.title} · ${m.fileName}</li>`).join(''); if(logins) logins.innerHTML = (JSON.parse(localStorage.getItem('loginActivity')||'{}').items||[]).map(i=>`<li>${i.device} · ${i.ts}</li>`).join(''); if(stor) stor.textContent = `${(JSON.stringify(localStorage).length/1024).toFixed(1)} KB used`; if(health) health.textContent = 'OK'; if(errs) errs.innerHTML = '<li>None</li>'; }
+    initializeAdminMonitoringPage();
+  </script>
+  </body>
+  </html>

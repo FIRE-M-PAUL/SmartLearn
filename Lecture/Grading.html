@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grading | SmartLearn</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="lecturer.html">Dashboard</a></nav></header>
+  <main class="main-content page-grading" style="padding:1rem">
+    <h2 class="section-title">Grading Management</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end">
+      <div><label>Course</label><select id="gradingCourse"><option value="ict">Information Technology</option><option value="cs">Computer Studies</option><option value="ce">Computer Engineering</option></select></div>
+      <div><label>Assignment/Test</label><select id="gradingAssignment"></select></div>
+      <div><label>Total Marks</label><input type="number" id="gradingTotalMarks" min="0" /></div>
+    </div>
+    <div style="margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem">
+      <div class="card"><div class="card-header"><div class="card-title">Title</div><div class="card-icon"><i class="fas fa-file-alt"></i></div></div><div class="card-value" id="gradingInfoTitle">-</div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Deadline</div><div class="card-icon"><i class="fas fa-hourglass-end"></i></div></div><div class="card-value" id="gradingInfoDeadline">-</div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Submissions</div><div class="card-icon"><i class="fas fa-upload"></i></div></div><div class="card-value" id="gradingInfoCount">0</div></div>
+    </div>
+    <div style="margin-top:1rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+      <select id="gradingFilter"><option value="all">All</option><option value="submitted">Submitted</option><option value="late">Late</option><option value="not">Not submitted</option><option value="passed">Passed</option><option value="failed">Failed</option><option value="high">Highest first</option><option value="low">Lowest first</option></select>
+      <button class="btn" id="publishAllBtn">Publish All</button>
+      <button class="btn" id="unpublishAllBtn">Unpublish All</button>
+      <button class="btn" id="exportCsvBtn">Export CSV</button>
+      <button class="btn" id="exportPdfBtn">Export PDF</button>
+    </div>
+    <div class="table-container" style="margin-top:1rem">
+      <h3>Student Submissions</h3>
+      <table><thead><tr><th>Name</th><th>ID</th><th>Status</th><th>Submission</th><th>Marks</th><th>Feedback</th><th>Publish</th><th>Actions</th></tr></thead><tbody id="gradingTableBody"></tbody></table>
+    </div>
+    <div class="table-container" style="margin-top:1rem">
+      <h3>Preview</h3>
+      <div id="gradingPreview" style="border:1px solid #ddd;border-radius:8px;padding:1rem;min-height:160px">Select a submission to preview</div>
+      <div style="margin-top:0.5rem;display:flex;gap:0.5rem"><button class="btn" id="aiSuggestGradeBtn">Use AI to Suggest Grade</button><button class="btn" id="aiSuggestFeedbackBtn">Use AI to Generate Feedback</button><button class="btn" id="downloadSubmissionBtn">Download Submission</button></div>
+    </div>
+    <div class="table-container" style="margin-top:1rem">
+      <h3>Grade Analytics</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+        <div class="card"><div class="card-header"><div class="card-title">Average</div><div class="card-icon"><i class="fas fa-chart-line"></i></div></div><div class="card-value" id="gradeAvg">0</div></div>
+        <div class="card"><div class="card-header"><div class="card-title">Pass Rate</div><div class="card-icon"><i class="fas fa-check"></i></div></div><div class="card-value" id="gradePass">0%</div></div>
+        <div class="card"><div class="card-header"><div class="card-title">Highest</div><div class="card-icon"><i class="fas fa-arrow-up"></i></div></div><div class="card-value" id="gradeHigh">0</div></div>
+        <div class="card"><div class="card-header"><div class="card-title">Lowest</div><div class="card-icon"><i class="fas fa-arrow-down"></i></div></div><div class="card-value" id="gradeLow">0</div></div>
+      </div>
+    </div>
+  </main>
+  <script src="../scripts.js"></script>
+  </body>
+  </html>

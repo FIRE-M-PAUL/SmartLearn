@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Announcements | SmartLearn Admin</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="admin.html">Admin Dashboard</a></nav></header>
+  <main class="main-content page-admin-announcements" style="padding:1rem">
+    <h2 class="section-title">Global Announcements</h2>
+    <div class="table-container">
+      <h3>Post Announcement</h3>
+      <form id="adminAnnouncementForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;align-items:end">
+        <div><label>Title</label><input type="text" id="adminAnnTitle" /></div>
+        <div><label>Message</label><input type="text" id="adminAnnMessage" /></div>
+        <div><label>Category</label><select id="adminAnnCategory"><option>General</option><option>Alert</option><option>Academic</option></select></div>
+        <div><label>Schedule</label><input type="datetime-local" id="adminAnnSchedule" /></div>
+        <button class="btn btn-primary" type="submit">Post</button>
+      </form>
+    </div>
+    <div class="table-container"><h3>History</h3><ul id="adminAnnouncementsList"></ul></div>
+  </main>
+  <script>
+    function loadAnnouncements(){ try{ const data = localStorage.getItem('studentAnnouncements'); return data ? JSON.parse(data) : []; }catch(e){ return [] } }
+    function pushStudentNotification(type, payload){ try{ const r = localStorage.getItem('notifications'); const list = r?JSON.parse(r):[]; list.unshift({ id: Date.now(), type, payload, ts: new Date().toISOString() }); localStorage.setItem('notifications', JSON.stringify(list)); }catch(e){} }
+    function initializeAdminAnnouncementsPage(){ const root = document.querySelector('.page-admin-announcements'); if(!root) return; const form = document.getElementById('adminAnnouncementForm'); const listEl = document.getElementById('adminAnnouncementsList'); function render(){ const list = JSON.parse(localStorage.getItem('adminAnnouncementsGlobal')||'[]'); listEl.innerHTML = list.map(a => `<li>${a.date} [${a.category}] · ${a.title}: ${a.message}</li>`).join(''); } if(form){ form.addEventListener('submit', (ev) => { ev.preventDefault(); const title = document.getElementById('adminAnnTitle').value; const message = document.getElementById('adminAnnMessage').value; const category = document.getElementById('adminAnnCategory').value; const sched = document.getElementById('adminAnnSchedule').value; const list = JSON.parse(localStorage.getItem('adminAnnouncementsGlobal')||'[]'); const item = { id: Date.now(), title, message, category, schedule: sched, date: new Date().toLocaleString() }; list.unshift(item); localStorage.setItem('adminAnnouncementsGlobal', JSON.stringify(list)); const studentList = loadAnnouncements(); studentList.unshift({ date: item.date, message: `[${category}] ${title}: ${message}` }); try{ localStorage.setItem('studentAnnouncements', JSON.stringify(studentList)); }catch(e){} pushStudentNotification('admin_announcement', { title }); render(); }); } render(); }
+    initializeAdminAnnouncementsPage();
+  </script>
+  </body>
+  </html>

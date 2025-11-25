@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SmartLearn - Certificate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      .cert-page { padding: 2rem 5%; display: flex; justify-content: center; }
+      .cert-wrap { background: white; padding: 1rem; border-radius: 12px; box-shadow: var(--box-shadow); }
+      .cert-actions { display:flex; gap:0.6rem; justify-content:center; margin-top:1rem; }
+      @media print {
+        .cert-actions, nav, footer, .chatbot-toggle-btn { display: none !important; }
+        body { background: white; }
+        .cert-wrap { box-shadow: none; padding: 0; }
+        canvas { width: 100% !important; height: auto !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="../home.html" class="logo"><i class="fas fa-brain"></i><span>SmartLearn</span></a>
+      <div class="nav-icons"><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></div>
+    </nav>
+    <section class="cert-page">
+      <div class="cert-wrap">
+        <canvas id="certCanvas" width="1200" height="850"></canvas>
+        <div class="cert-actions">
+          <button id="downloadPng" class="btn btn-primary"><i class="fas fa-download"></i> Download PNG</button>
+          <button id="printPdf" class="btn"><i class="fas fa-file-pdf"></i> Print PDF</button>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="footer-content">
+        <div class="footer-logo"><i class="fas fa-brain"></i> SmartLearn</div>
+        <p>Empowering learners with AI-driven education</p>
+        <div class="footer-links">
+          <a href="../contact.html">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+        <div class="copyright">&copy; 2025 SmartLearn. All rights reserved.</div>
+      </div>
+    </footer>
+    <script>
+      const canvas = document.getElementById('certCanvas')
+      const ctx = canvas.getContext('2d')
+      function getLS(key, def='') { try { return localStorage.getItem(key) || def } catch(e){ return def } }
+      const name = getLS('certName', getLS('studentDisplayName', getLS('studentName','Student')))
+      const course = getLS('certCourse','Course')
+      const dateStr = getLS('certDate', new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' }))
+      const style = getLS('certStyle','gold')
+      function roundRect(x,y,w,h,r){ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r); ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath() }
+      function drawBase(){
+        ctx.fillStyle = '#ffffff'; ctx.fillRect(0,0,canvas.width,canvas.height)
+        if (style === 'gold') {
+          // gold swoosh
+          const grad = ctx.createLinearGradient(0,0,canvas.width,0)
+          grad.addColorStop(0,'#f5d66b'); grad.addColorStop(1,'#d4a017')
+          ctx.fillStyle = grad
+          ctx.beginPath()
+          ctx.moveTo(0,0); ctx.lineTo(canvas.width,0); ctx.lineTo(canvas.width,180); ctx.quadraticCurveTo(canvas.width*0.5,280,0,180); ctx.closePath(); ctx.fill()
+          ctx.beginPath()
+          ctx.moveTo(0,canvas.height); ctx.lineTo(canvas.width,canvas.height); ctx.lineTo(canvas.width,canvas.height-160); ctx.quadraticCurveTo(canvas.width*0.5,canvas.height-260,0,canvas.height-160); ctx.closePath(); ctx.fill()
+        } else if (style === 'dark') {
+          // dark geometric
+          ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,canvas.width,canvas.height)
+          const grad2 = ctx.createLinearGradient(0,0,canvas.width,0)
+          grad2.addColorStop(0,'#172554'); grad2.addColorStop(1,'#1e293b')
+          ctx.fillStyle = grad2
+          roundRect(50,50,canvas.width-100,canvas.height-100,20); ctx.fill()
+        } else {
+          // pastel waves
+          ctx.fillStyle = '#faf9f6'; ctx.fillRect(0,0,canvas.width,canvas.height)
+          ctx.fillStyle = '#e0e7ff'; ctx.beginPath(); ctx.moveTo(0,200); ctx.quadraticCurveTo(300,120,600,200); ctx.quadraticCurveTo(900,280,1200,200); ctx.lineTo(1200,0); ctx.lineTo(0,0); ctx.closePath(); ctx.fill()
+          ctx.fillStyle = '#fde2e4'; ctx.beginPath(); ctx.moveTo(0,650); ctx.quadraticCurveTo(300,720,600,650); ctx.quadraticCurveTo(900,580,1200,650); ctx.lineTo(1200,850); ctx.lineTo(0,850); ctx.closePath(); ctx.fill()
+        }
+      }
+      function drawContent(){
+        // inner card
+        if (style !== 'dark') { ctx.fillStyle = '#ffffff'; roundRect(80,80,canvas.width-160,canvas.height-160,16); ctx.shadowColor='rgba(0,0,0,0.12)'; ctx.shadowBlur=20; ctx.fill(); ctx.shadowBlur=0 }
+        // title
+        ctx.fillStyle = (style==='dark') ? '#f8fafc' : '#111827'
+        ctx.font = 'bold 48px Segoe UI'
+        const title = 'CERTIFICATE OF COMPLETION'
+        ctx.textAlign = 'center'
+        ctx.fillText(title, canvas.width/2, 220)
+        // subtitle
+        ctx.fillStyle = (style==='dark') ? '#cbd5e1' : '#6b7280'
+        ctx.font = '24px Segoe UI'
+        ctx.fillText('This certifies that', canvas.width/2, 300)
+        // name
+        ctx.fillStyle = (style==='dark') ? '#fde68a' : '#d4a017'
+        ctx.font = 'italic 64px Georgia'
+        ctx.fillText(name, canvas.width/2, 380)
+        // course line
+        ctx.fillStyle = (style==='dark') ? '#e2e8f0' : '#374151'
+        ctx.font = '22px Segoe UI'
+        ctx.fillText('has successfully completed the course', canvas.width/2, 440)
+        ctx.font = 'bold 28px Segoe UI'
+        ctx.fillText(course, canvas.width/2, 480)
+        // date
+        ctx.fillStyle = (style==='dark') ? '#cbd5e1' : '#6b7280'
+        ctx.font = '20px Segoe UI'
+        ctx.fillText(dateStr, canvas.width/2, 520)
+        // signature area
+        ctx.fillStyle = (style==='dark') ? '#f8fafc' : '#111827'
+        ctx.font = '18px Segoe UI'
+        ctx.fillText('Mulilo Paul', canvas.width/2 - 200, 640)
+        ctx.fillText('CEO of SmartLearn', canvas.width/2 - 200, 665)
+        ctx.fillText('Blazing Flame', canvas.width/2 + 200, 640)
+        ctx.fillText('Academic Director', canvas.width/2 + 200, 665)
+        // badge
+        const grd = ctx.createRadialGradient(canvas.width/2, 570, 10, canvas.width/2, 570, 40)
+        grd.addColorStop(0, (style==='dark') ? '#f59e0b' : '#ffd166')
+        grd.addColorStop(1, (style==='dark') ? '#7c2d12' : '#c084fc')
+        ctx.fillStyle = grd
+        ctx.beginPath(); ctx.arc(canvas.width/2, 570, 36, 0, Math.PI*2); ctx.fill()
+        ctx.fillStyle = '#111827'; ctx.font = 'bold 18px Segoe UI'; ctx.textAlign='center'; ctx.fillText('AWARD', canvas.width/2, 575)
+      }
+      function render(){ drawBase(); drawContent() }
+      render()
+      document.getElementById('downloadPng').addEventListener('click', () => {
+        const url = canvas.toDataURL('image/png')
+        const a = document.createElement('a')
+        a.href = url
+        a.download = `Certificate_${course.replace(/\s+/g,'_')}.png`
+        a.click()
+      })
+      document.getElementById('printPdf').addEventListener('click', () => { window.print() })
+    </script>
+  </body>
+</html>

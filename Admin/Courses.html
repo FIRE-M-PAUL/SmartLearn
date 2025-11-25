@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Management | SmartLearn Admin</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+  <header class="header"><div class="logo"><i class="fas fa-brain"></i> SmartLearn</div><nav class="header-nav"><a href="admin.html">Admin Dashboard</a></nav></header>
+  <main class="main-content page-admin-courses" style="padding:1rem">
+    <h2 class="section-title">Course Management</h2>
+    <div class="table-container">
+      <h3>Create Course</h3>
+      <form id="adminCreateCourseForm" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem">
+        <div><label>Course Title</label><input type="text" id="courseTitle" /></div>
+        <div><label>Course Code</label><input type="text" id="courseCode" /></div>
+        <div><label>Department</label><input type="text" id="courseDept" /></div>
+        <div><label>Assign Lecturer</label><input type="text" id="courseLecturer" placeholder="Lecturer email or name" /></div>
+        <button class="btn btn-primary" type="submit">Create Course</button>
+      </form>
+    </div>
+    <div class="table-container">
+      <h3>Courses</h3>
+      <table><thead><tr><th>Title</th><th>Code</th><th>Lecturer</th><th>Students</th><th>Actions</th></tr></thead><tbody id="adminCoursesTable"></tbody></table>
+    </div>
+  </main>
+  <script>
+    function loadAdminCourses(){ try{ const r = localStorage.getItem('adminCourses'); return r?JSON.parse(r):[] }catch(e){ return [] } }
+    function saveAdminCourses(list){ try{ localStorage.setItem('adminCourses', JSON.stringify(list)) }catch(e){} }
+    function pushAdminLog(text){ try{ const r = localStorage.getItem('adminLogs'); const list = r?JSON.parse(r):[]; list.unshift({ ts:new Date().toLocaleString(), text }); localStorage.setItem('adminLogs', JSON.stringify(list)); }catch(e){} }
+    function initializeAdminCoursesPage(){ const root = document.querySelector('.page-admin-courses'); if(!root) return; const form = document.getElementById('adminCreateCourseForm'); const table = document.getElementById('adminCoursesTable'); function render(){ const list = loadAdminCourses(); table.innerHTML = list.map(c => `<tr><td>${c.title}</td><td>${c.code}</td><td>${c.lecturer||'-'}</td><td>${c.students||0}</td><td><button class="btn" data-del="${c.id}">Delete</button></td></tr>`).join(''); table.querySelectorAll('button[data-del]').forEach(b => { b.addEventListener('click', () => { const id = parseInt(b.getAttribute('data-del')); const list = loadAdminCourses().filter(x=>x.id!==id); saveAdminCourses(list); pushAdminLog('Deleted course '+id); render(); }); }); } function tryAssignLecturerToSeededCourse(title, dept, lecturer){ const map = { ict: 'ict-introduction', cs:'cs-computer-applications', ce:'ce-digital-logic-design' }; let key = null; if(title.toLowerCase().includes('ict') || dept.toLowerCase().includes('ict')) key = map.ict; else if(title.toLowerCase().includes('computer applications') || dept.toLowerCase().includes('cs')) key = map.cs; else if(title.toLowerCase().includes('digital logic') || dept.toLowerCase().includes('ce')) key = map.ce; if(!key) return; fetch('http://127.0.0.1:5000/users?role=lecturer').then(r=>r.json()).then(list=>{ const found = list.find(u => (lecturer && lecturer.toLowerCase()===u.email.toLowerCase()) || (lecturer && lecturer.toLowerCase()===u.name.toLowerCase())); if(found){ fetch('http://127.0.0.1:5000/courses/'+key+'/assign-lecturer', { method:'PUT', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify({ lecturer_id: found.id }) }); } }).catch(()=>{}); }
+    if(form){ form.addEventListener('submit', (ev) => { ev.preventDefault(); const title = document.getElementById('courseTitle').value; const code = document.getElementById('courseCode').value; const dept = document.getElementById('courseDept').value; const lecturer = document.getElementById('courseLecturer').value; const c = { id: Date.now(), title, code, dept, lecturer, students: 0 }; const list = loadAdminCourses(); list.push(c); saveAdminCourses(list); tryAssignLecturerToSeededCourse(title, dept, lecturer); pushAdminLog('Created course '+c.title); render(); }); } render(); }
+    initializeAdminCoursesPage();
+  </script>
+  </body>
+  </html>
